@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 * {
     margin: 0;
     padding: 0;
@@ -65,7 +67,10 @@ nav ul {
 }
 
 nav li a {
-    display: block;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    gap: 8px;
     padding: 10px 14px;
     text-decoration: none;
     color: #000000;
@@ -98,22 +103,26 @@ nav li a:hover, nav li a.ativo {
 }
 
 .sair {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 75%;
+    font-size: 16px;
+    width: 85%;
     padding: 10px 20px;
     text-decoration: none;
     color: #000;
     border: 1px solid #00000040;
-    border-radius: 20px;
+    border-radius: 25px;
     background: #fff;
     box-shadow: 3px 7px 10px rgba(0, 0, 0, 0.137);
     transition: all 0.2s ease;
     font-weight: bold;
-    gap: 8px;
     margin: 0 auto; 
+}
+
+span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
 }
 
 .sair:hover {
