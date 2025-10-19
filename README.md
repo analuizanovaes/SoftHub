@@ -8,7 +8,7 @@ O objetivo é centralizar as práticas e aprendizados adquiridos ao longo da exp
 Cada pasta representa um projeto independente:  
 
 - [tela-login](./tela-login)  
-- [menu-lateral](./menu-lateral)
+- [menu-lateral](./menu)
 - [projeto-financeiro](./projeto-financeiro).
 - (novos projetos serão adicionados aqui)  
 
