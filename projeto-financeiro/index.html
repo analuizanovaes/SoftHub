@@ -5,13 +5,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Calculadora Financeira - Unieuro</title>
-    
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="imagens/faviconunieuro.png" type="image/png" />
-    
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
-    
+
     <!-- TailwindCSS (Play CDN v4) -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
 
@@ -26,17 +26,25 @@
     <div class="bg-white">
         <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <!-- Logo Unieuro -->
-            <img src="imagens/logounieuro.png" alt="Logo Unieuro" class="h-16"> 
-            
+            <img src="imagens/logounieuro.png" alt="Logo Unieuro" class="h-16">
+
             <div class="flex space-x-2">
-                <a href="https://twitter.com/UNIEURO_OFICIAL" target="_blank" class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i class="bi bi-twitter-x"></i></a>
-                <a href="https://www.facebook.com/unieuronarede" target="_blank" class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i class="bi bi-facebook"></i></a>
-                <a href="https://www.instagram.com/unieuro_oficial/" target="_blank" class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i class="bi bi-instagram"></i></a>
-                <a href="https://www.youtube.com/channel/UCtV17kCGS6rCvnqFyUgl1vw" target="_blank" class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i class="bi bi-youtube"></i></a>
+                <a href="https://twitter.com/UNIEURO_OFICIAL" target="_blank"
+                    class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i
+                        class="bi bi-twitter-x"></i></a>
+                <a href="https://www.facebook.com/unieuronarede" target="_blank"
+                    class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i
+                        class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/unieuro_oficial/" target="_blank"
+                    class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i
+                        class="bi bi-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCtV17kCGS6rCvnqFyUgl1vw" target="_blank"
+                    class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i
+                        class="bi bi-youtube"></i></a>
             </div>
         </div>
     </div>
-    
+
     <!-- BARRA DE NAVEGAÇÃO PRINCIPAL -->
     <nav class="bg-[#0D4B81] shadow-md">
         <div class="max-w-7xl mx-auto px-6">
@@ -56,37 +64,45 @@
                 <h1 class="text-xl font-bold text-[#0D4B81] mb-5">1. Insira os valores de referência</h1>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                        <label for="valor-mensalidade" class="font-medium text-gray-700 mb-2 flex items-center space-x-2">
-                            <span class="flex items-center justify-center w-6 h-6 border-2 border-gray-400 rounded-full">
+                        <label for="valor-mensalidade"
+                            class="font-medium text-gray-700 mb-2 flex items-center space-x-2">
+                            <span
+                                class="flex items-center justify-center w-6 h-6 border-2 border-gray-400 rounded-full">
                                 <i class="bi bi-currency-dollar text-sm text-gray-700"></i>
-                                </span>
-                                    <span>Valor da Mensalidade Bruta</span>
+                            </span>
+                            <span>Valor da Mensalidade Bruta</span>
                         </label>
                         <div class="relative">
                             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">R$</span>
-                            <input id="valor-mensalidade" type="number" placeholder="0,00" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0D4B81]">
+                            <input id="valor-mensalidade" type="number" placeholder="0,00"
+                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0D4B81]">
                         </div>
                         <p class="text-xs text-gray-500 mt-1">Valor sem nenhum desconto aplicado</p>
                     </div>
                     <div>
-                        <label for="desconto-unieuro" class="font-medium text-gray-700 mb-2 flex items-center space-x-2">
-                            <span class="flex items-center justify-center w-6 h-6 border-2 border-gray-400 rounded-full">
+                        <label for="desconto-unieuro"
+                            class="font-medium text-gray-700 mb-2 flex items-center space-x-2">
+                            <span
+                                class="flex items-center justify-center w-6 h-6 border-2 border-gray-400 rounded-full">
                                 <i class="bi bi-percent text-sm text-gray-700"></i>
-                    </span>
+                            </span>
                             <span>Desconto Unieuro</span>
-                    </label>
+                        </label>
                         <div class="relative">
-                            <input id="desconto-unieuro" type="number" placeholder="0" class="w-full pl-4 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0D4B81]">
+                            <input id="desconto-unieuro" type="number" placeholder="0"
+                                class="w-full pl-4 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0D4B81]">
                         </div>
                         <p class="text-xs text-gray-500 mt-1">Permitido de 5% até 50%</p>
                     </div>
                 </div>
                 <div class="flex justify-center space-x-4 mt-6">
-                    <button id="btn-limpar" class="px-8 py-2 bg-white border border-gray-300 rounded-md font-semibold text-gray-700 hover:bg-gray-50 flex items-center space-x-2 shadow cursor-pointer">
+                    <button id="btn-limpar"
+                        class="px-8 py-2 bg-white border border-gray-300 rounded-md font-semibold text-gray-700 hover:bg-gray-50 flex items-center space-x-2 shadow cursor-pointer">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span>Limpar</span>
                     </button>
-                    <button id="btn-calcular" class="px-8 py-2 bg-[#0D4B81] text-white rounded-md font-semibold hover:bg-blue-800 shadow flex items-center space-x-2 cursor-pointer">
+                    <button id="btn-calcular"
+                        class="px-8 py-2 bg-[#0D4B81] text-white rounded-md font-semibold hover:bg-blue-800 shadow flex items-center space-x-2 cursor-pointer">
                         <i class="bi bi-calculator"></i>
                         <span>Calcular</span>
                     </button>
@@ -100,10 +116,11 @@
                 <h2 class="text-xl font-bold text-[#0D4B81] mb-5">2. Resultado Base</h2>
                 <div class="bg-[#F0F5FA] border-[3px] border-[#00326F] rounded-lg p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
+
                         <div class="border-[3px] border-[#00326F] rounded-lg p-6 text-center bg-white">
                             <i class="bi bi-wallet2 text-3xl text-[#00326F]"></i>
-                            <p id="resultado-mensalidade-com-desconto" class="text-gray-600 mt-2">Mensalidade com Desconto</p>
+                            <p id="resultado-mensalidade-com-desconto" class="text-gray-600 mt-2">Mensalidade com
+                                Desconto</p>
                             <p class="text-4xl font-bold text-[#0D4B81] my-1">R$ 0,00</p>
                             <p class="text-sm text-gray-500">Por mês</p>
                         </div>
@@ -113,7 +130,7 @@
                             <p class="text-4xl font-bold text-[#B19F4D] my-1">R$ 0,00</p>
                             <p class="text-sm text-gray-500">6 mensalidades</p>
                         </div>
-            
+
                         <div class="bg-gray-200 rounded-lg p-6 text-center text-gray-500 border-[3px] border-gray-400">
                             <i class="bi bi-wallet2 text-3xl"></i>
                             <p id="resultado-mensalidade-sem-desconto" class="mt-2">Mensalidade sem Desconto</p>
@@ -128,18 +145,21 @@
                         </div>
                     </div>
                 </div>
-                    <div class="bg-blue-100 text-blue-800 border-l-4 border-blue-500 p-4 mt-6 rounded-md flex items-start space-x-3">
-                        <i class="bi bi-info-circle-fill text-xl text-blue-600 flex-shrink-0"></i>
-                        <p class="flex-grow">
-                        <span class="font-bold">Importante:</span> Estes são os valores base para as simulações de descontos adicionais abaixo. </p>
-                    </div>
+                <div
+                    class="bg-blue-100 text-blue-800 border-l-4 border-blue-500 p-4 mt-6 rounded-md flex items-start space-x-3">
+                    <i class="bi bi-info-circle-fill text-xl text-blue-600 flex-shrink-0"></i>
+                    <p class="flex-grow">
+                        <span class="font-bold">Importante:</span> Estes são os valores base para as simulações de
+                        descontos adicionais abaixo.
+                    </p>
+                </div>
             </section>
-            
+
             <!-- SEÇÃO 3: SIMULAR DESCONTOS ADICIONAIS -->
             <section id="simular-descontos" class="mb-10">
                 <h2 class="text-xl font-bold text-[#0D4B81] mb-5">3. Simular Descontos Adicionais</h2>
                 <div class="bg-[#FEFFDF] border-2 border-[#C4A912] rounded-lg p-6">
-            
+
                     <div class="flex justify-between items-start">
                         <div class="flex items-center space-x-4">
                             <img src="imagens/logo-prouni.png" alt="Logo Prouni" class="h-22">
@@ -148,14 +168,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-[#F9F9EB] border border-gray-300 rounded-md p-4 flex justify-between items-center mt-4">
+                    <div
+                        class="bg-[#F9F9EB] border border-gray-300 rounded-md p-4 flex justify-between items-center mt-4">
                         <div>
                             <p class="font-medium">Tenho Bolsa Prouni</p>
                             <p class="text-sm text-gray-500">Aplicação de 50% de desconto</p>
                         </div>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="toggle-prouni" class="sr-only peer" checked>
-                            <div class="w-11 h-6 bg-gray-200 rounded-full peer
+                            <div
+                                class="w-11 h-6 bg-gray-200 rounded-full peer
                                         peer-checked:bg-[#BFBF33]
                                         peer-checked:after:translate-x-full
                                         after:content-[''] after:absolute after:top-0.5 after:left-[2px]
@@ -164,7 +186,8 @@
                             </div>
                         </label>
                     </div>
-                    <div id="bloco-resultado-prouni" class="bg-[#FEFFDF] rounded-md p-6 mt-4 border-l-4 border-[#C4A912] hidden">
+                    <div id="bloco-resultado-prouni"
+                        class="bg-[#FEFFDF] rounded-md p-6 mt-4 border-l-4 border-[#C4A912] hidden">
                         <p class="font-bold mb-4 text-black">Nova Mensalidade (PROUNI 50%)</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div>
@@ -176,25 +199,36 @@
                                 <p class="text-3xl font-bold text-black">R$ 0.00</p>
                             </div>
                         </div>
-                        <p class="text-sm text-black mt-2">Desconto de 50% aplicado sobre o valor com desconto Unieuro.</p>
+                        <p class="text-sm text-black mt-2">Desconto de 50% aplicado sobre o valor com desconto Unieuro.
+                        </p>
                     </div>
                 </div>
-            
-                <div class="bg-[#FEFFDF] text-yellow-900 border-l-4 border-[#C4A912] p-4 mt-6 rounded-md flex items-center space-x-3">
+
+                <div
+                    class="bg-[#FEFFDF] text-yellow-900 border-l-4 border-[#C4A912] p-4 mt-6 rounded-md flex items-center space-x-3">
                     <i class="bi bi-exclamation-triangle-fill text-xl text-yellow-500"></i>
-                <div>
-                    <span class="font-bold">Importante:</span> A ordem de aplicação dos descontos é: <span class="font-bold">Desconto Unieuro → PROUNI (se houver)</span>.
+                    <div>
+                        <span class="font-bold">Importante:</span> A ordem de aplicação dos descontos é: <span
+                            class="font-bold">Desconto Unieuro → PROUNI (se houver)</span>.
+                    </div>
                 </div>
-</div>
             </section>
         </div>
 
         <!-- BOTÃO GERAR PDF -->
         <section id="pdf-section" class="text-center my-10">
-            <button id="btn-pdf" class="bg-[#0D4B81] text-white font-semibold px-6 py-3 rounded-md hover:bg-blue-800 flex items-center justify-center space-x-2 mx-auto shadow cursor-pointer">
+            <button id="btn-pdf"
+                class="bg-[#0D4B81] text-white font-semibold px-6 py-3 rounded-md hover:bg-blue-800 flex items-center justify-center space-x-2 mx-auto shadow cursor-pointer">
                 <i class="bi bi-file-earmark-pdf"></i>
                 <span>Gerar PDF</span>
             </button>
+            
+            <div class="text-xs text-gray-500 mt-4">
+                <span class="font-bold">*Importante: </span> caso de divergência ou dúvida nos valores e/ou percentuais, deverá procurar a <span class="font-bold">Central de Atendimento </span> de sua Unidade para auxílio.</span>
+            </div>
+            
+
+
         </section>
 
         <!-- SEÇÃO 4: LINKS ÚTEIS -->
@@ -202,23 +236,33 @@
             <h2 class="text-xl font-bold text-[#0D4B81]">Links Úteis</h2>
             <p class="text-gray-600 mb-5">Acesso Recursos oficiais para mais informações sobre os programas</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <a href="https://www.caixa.gov.br/programas-sociais/fies/Paginas/default.aspx" class="bg-white border border-gray-300 rounded-lg p-4 flex items-center space-x-4 hover:shadow-md transition-shadow" target="_blank">
-                    <div class="bg-blue-100 p-3 rounded-full"><i class="bi bi-question-circle text-2xl text-blue-600"></i></div>
+                <a href="https://www.caixa.gov.br/programas-sociais/fies/Paginas/default.aspx"
+                    class="bg-white border border-gray-300 rounded-lg p-4 flex items-center space-x-4 hover:shadow-md transition-shadow"
+                    target="_blank">
+                    <div class="bg-blue-100 p-3 rounded-full"><i
+                            class="bi bi-question-circle text-2xl text-blue-600"></i></div>
                     <div>
-                        <p class="font-semibold text-lg">Perguntas Frequentes - FIES<p>
+                        <p class="font-semibold text-lg">Perguntas Frequentes - FIES
+                        <p>
                         <p class="text-sm text-gray-500">Tire suas dúvidas sobre o financiamento estudantil</p>
                     </div>
                 </a>
-                <a href="https://www.caixa.gov.br/Downloads/credito-fies/Cartilha_Estudante_FIES.pdf" class="bg-white border border-gray-300 rounded-lg p-4 flex items-center space-x-4 hover:shadow-md transition-shadow" target="_blank">
-                    <div class="bg-purple-100 p-3 rounded-full"><i class="bi bi-book text-2xl text-purple-600"></i></div>
+                <a href="https://www.caixa.gov.br/Downloads/credito-fies/Cartilha_Estudante_FIES.pdf"
+                    class="bg-white border border-gray-300 rounded-lg p-4 flex items-center space-x-4 hover:shadow-md transition-shadow"
+                    target="_blank">
+                    <div class="bg-purple-100 p-3 rounded-full"><i class="bi bi-book text-2xl text-purple-600"></i>
+                    </div>
                     <div>
                         <p class="font-semibold text-lg">Cartilha - FIES</p>
                         <p class="text-sm text-gray-500">Acesse o guia completo do FIES</p>
                     </div>
                 </a>
                 <div class="md:col-span-2 flex justify-center">
-                    <a href="https://sifesweb.caixa.gov.br/fes-web/" class="bg-white border border-gray-300 rounded-lg p-4 flex items-center space-x-4 hover:shadow-md transition-shadow w-full md:w-[calc(50%-0.75rem)]" target="_blank">
-                        <div class="bg-orange-100 p-3 rounded-full"><i class="bi bi-bank text-2xl text-orange-500"></i></div>
+                    <a href="https://sifesweb.caixa.gov.br/fes-web/"
+                        class="bg-white border border-gray-300 rounded-lg p-4 flex items-center space-x-4 hover:shadow-md transition-shadow w-full md:w-[calc(50%-0.75rem)]"
+                        target="_blank">
+                        <div class="bg-orange-100 p-3 rounded-full"><i class="bi bi-bank text-2xl text-orange-500"></i>
+                        </div>
                         <div>
                             <p class="font-semibold text-lg">Caixa Econômica Federal</p>
                             <p class="text-sm text-gray-500">Tire suas dúvidas sobre o financiamento estudantil</p>
@@ -227,10 +271,13 @@
                 </div>
             </div>
 
-            <div class="bg-blue-100 text-blue-800 border-l-4 border-blue-500 p-4 mt-6 rounded-md flex items-start space-x-3">
+            <div
+                class="bg-blue-100 text-blue-800 border-l-4 border-blue-500 p-4 mt-6 rounded-md flex items-start space-x-3">
                 <i class="bi bi-info-circle-fill text-xl text-blue-600 flex-shrink-0"></i>
                 <p class="flex-grow">
-                <span class="font-bold">Importante:</span> Os links acima direcionam para sites oficiais do governo e instituições financeiras. </p>
+                    <span class="font-bold">Importante:</span> Os links acima direcionam para sites oficiais do governo
+                    e instituições financeiras.
+                </p>
             </div>
         </section>
 
@@ -240,7 +287,7 @@
     <footer class="bg-[#093763] text-gray-300 text-center text-xs py-4 mt-10">
         <strong>© 2025 Centro Universitário Unieuro — Desenvolvido pela Fábrica de Software | SOFTHUB.</strong>
     </footer>
-        <script src="script.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
-</html>
 
+</html>
