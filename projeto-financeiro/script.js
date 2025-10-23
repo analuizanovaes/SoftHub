@@ -241,6 +241,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div style="margin-top: 30px; padding: 15px; background: #f0f0f0; border-radius: 5px; -webkit-print-color-adjust: exact; print-color-adjust: exact;">
                     <p><strong>FIES:</strong> Não calculado automaticamente. Consulte a Central de Atendimento.</p>
                 </div>
+
+                <!-- Dúvidas -->
+                <div style="margin-top: 30px; padding: 15px; background: #f0f0f0; border-radius: 5px; -webkit-print-color-adjust: exact; print-color-adjust: exact;">
+                    <p><strong>IMPORTANTE:</strong> Em caso de divergência ou dúvida nos valores e/ou percentuais, deverá procurar a Central de Atendimento de sua Unidade para auxílio.</p>
+                </div>
                 
                 <!-- Botão de impressão (visível apenas na tela) -->
                 <div class="no-print" style="text-align: center; margin-top: 20px;">
