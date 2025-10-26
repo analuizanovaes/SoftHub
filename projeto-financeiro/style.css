@@ -1,0 +1,40 @@
+/* Para telas grandes (computador) */
+@media (min-width: 641px) {
+    .social-icons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    /* Não exibe os ícones na parte inferior em telas grandes */
+    .social-footer {
+        display: none;
+    }
+}
+
+/* Para telas pequenas (celulares) */
+@media (max-width: 640px) {
+    /* Esconde os ícones da parte superior */
+    .social-icons {
+        display: none; /* Remover os ícones da parte superior para celulares */
+    }
+
+    /* Exibe os ícones no rodapé */
+    #social-footer {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    #social-footer a {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0D4B81;
+        border-radius: 50%;
+        color: white;
+    }
+}

@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Calculadora Financeira - Unieuro</title>
-    
+
     <!-- Link CSS -->
     <link rel="stylesheet" href="style.css">
 
@@ -17,6 +17,45 @@
 
     <!-- TailwindCSS (Play CDN v4) -->
     <link href="estilos-compilados.css" rel="stylesheet">
+
+    <style>
+        /* Estilos para os ícones sociais - RESPONSIVOS */
+        .social-icons-header {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .social-icons-footer {
+            display: none;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .social-icons-footer a,
+        .social-icons-header a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0D4B81;
+            border-radius: 50%;
+            color: white;
+        }
+
+        /* Para telas pequenas (celulares) */
+        @media (max-width: 640px) {
+            .social-icons-header {
+                display: none;
+            }
+
+            .social-icons-footer {
+                display: flex;
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -27,19 +66,20 @@
             <!-- Logo Unieuro -->
             <img src="imagens/logounieuro.png" alt="Logo Unieuro" class="h-16">
 
-            <div class="flex space-x-2">
-                <a href="https://twitter.com/UNIEURO_OFICIAL" target="_blank"
-                    class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i
-                        class="bi bi-twitter-x"></i></a>
-                <a href="https://www.facebook.com/unieuronarede" target="_blank"
-                    class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i
-                        class="bi bi-facebook"></i></a>
-                <a href="https://www.instagram.com/unieuro_oficial/" target="_blank"
-                    class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i
-                        class="bi bi-instagram"></i></a>
-                <a href="https://www.youtube.com/channel/UCtV17kCGS6rCvnqFyUgl1vw" target="_blank"
-                    class="w-8 h-8 rounded-full flex items-center justify-center bg-[#0D4B81] text-white"><i
-                        class="bi bi-youtube"></i></a>
+            <!-- Ícones das redes sociais - VISÍVEL APENAS NO DESKTOP -->
+            <div class="social-icons-header">
+                <a href="https://twitter.com/UNIEURO_OFICIAL" target="_blank">
+                    <i class="bi bi-twitter-x"></i>
+                </a>
+                <a href="https://www.facebook.com/unieuronarede" target="_blank">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/unieuro_oficial/" target="_blank">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCtV17kCGS6rCvnqFyUgl1vw" target="_blank">
+                    <i class="bi bi-youtube"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -73,7 +113,7 @@
                         </label>
                         <div class="relative">
                             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">R$</span>
-                            <input id="valor-mensalidade" type="number" placeholder="0,00"
+                            <input id="valor-mensalidade" type="text" placeholder="0,00"
                                 class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0D4B81] bg-gray-100">
                         </div>
                         <p class="text-xs text-gray-500 mt-1">Valor sem nenhum desconto aplicado</p>
@@ -148,7 +188,8 @@
                     class="bg-blue-100 text-blue-800 border-l-4 border-blue-500 p-4 mt-6 rounded-md flex items-start space-x-3">
                     <i class="bi bi-info-circle-fill text-xl text-blue-600 flex-shrink-0"></i>
                     <p class="flex-grow">
-                        <span class="font-bold">Importante:</span> Estes são os valores base para as simulações de descontos adicionais abaixo. Todos os cálculos seguintes usarão estes valores como referência.
+                        <span class="font-bold">Importante:</span> Estes são os valores base para as simulações de
+                        descontos adicionais abaixo. Todos os cálculos seguintes usarão estes valores como referência.
                     </p>
                 </div>
             </section>
@@ -207,7 +248,8 @@
                     <i class="bi bi-exclamation-triangle-fill text-xl text-yellow-500"></i>
                     <div>
                         <span class="font-bold">Importante:</span> A ordem de aplicação dos descontos é: <span
-                            class="font-bold"> Desconto Unieuro → PROUNI (se houver) → FIES (se houver)</span>. <span>Cada desconto é calculado sobre o valor resultante do desconto anterior.</span>
+                            class="font-bold"> Desconto Unieuro → PROUNI (se houver) → FIES (se houver)</span>.
+                        <span>Cada desconto é calculado sobre o valor resultante do desconto anterior.</span>
                     </div>
                 </div>
             </section>
@@ -220,9 +262,10 @@
                 <i class="bi bi-file-earmark-pdf"></i>
                 <span>Gerar PDF</span>
             </button>
-            
+
             <div class="text-xs text-gray-500 mt-4">
-                <span class="font-bold">*Importante: </span> caso de divergência ou dúvida nos valores e/ou percentuais, deverá procurar a <span class="font-bold">Central de Atendimento </span> de sua Unidade para auxílio.
+                <span class="font-bold">*Importante: </span> caso de divergência ou dúvida nos valores e/ou percentuais,
+                deverá procurar a <span class="font-bold">Central de Atendimento </span> de sua Unidade para auxílio.
             </div>
         </section>
 
@@ -269,12 +312,30 @@
                 class="bg-blue-100 text-blue-800 border-l-4 border-blue-500 p-4 mt-6 rounded-md flex items-start space-x-3">
                 <i class="bi bi-info-circle-fill text-xl text-blue-600 flex-shrink-0"></i>
                 <p class="flex-grow">
-                    <span class="font-bold">Importante:</span> Os links acima direcionam para sites oficiais do governo e instituições financeiras. Consulte sempre as fontes oficiais para informações atualizadas sobre regras e requisitos dos programas.
+                    <span class="font-bold">Importante:</span> Os links acima direcionam para sites oficiais do governo
+                    e instituições financeiras. Consulte sempre as fontes oficiais para informações atualizadas sobre
+                    regras e requisitos dos programas.
                 </p>
             </div>
         </section>
 
     </main>
+
+    <!-- Ícones das redes sociais - VISÍVEL APENAS NO MOBILE -->
+    <div class="social-icons-footer">
+        <a href="https://twitter.com/UNIEURO_OFICIAL" target="_blank">
+            <i class="bi bi-twitter-x"></i>
+        </a>
+        <a href="https://www.facebook.com/unieuronarede" target="_blank">
+            <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/unieuro_oficial/" target="_blank">
+            <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UCtV17kCGS6rCvnqFyUgl1vw" target="_blank">
+            <i class="bi bi-youtube"></i>
+        </a>
+    </div>
 
     <!-- Rodapé -->
     <footer class="bg-[#093763] text-gray-300 text-center text-xs py-4 mt-10">
