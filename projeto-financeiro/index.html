@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -20,6 +21,10 @@
 
     <style>
         /* Estilos para os ícones sociais - RESPONSIVOS */
+        html {
+            scroll-behavior: smooth;
+        }
+
         .social-icons-header {
             display: flex;
             justify-content: flex-end;
@@ -49,6 +54,10 @@
         @media (max-width: 640px) {
             .social-icons-header {
                 display: none;
+            }
+
+            .justify-between {
+                justify-content: center;
             }
 
             .social-icons-footer {
@@ -86,10 +95,11 @@
 
     <!-- BARRA DE NAVEGAÇÃO PRINCIPAL -->
     <nav class="bg-[#0D4B81] shadow-md">
-        <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between">
             <ul class="flex space-x-8 text-white font-semibold">
                 <li class="cursor-pointer py-3">TELA INICIAL</li>
                 <li class="cursor-pointer py-3 border-b-4 border-[#C4A912]">CALCULADORA</li>
+                <li class="cursor-pointer py-3"><a href="#links-uteis">FAQ</a></li>
             </ul>
         </div>
     </nav>
