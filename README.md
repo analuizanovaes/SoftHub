@@ -10,7 +10,7 @@ Cada pasta representa um projeto independente:
 - [tela-login](./tela-login)  
 - [menu-lateral](./menu)
 - [projeto-financeiro](./projeto-financeiro)
-- [clinicapsicologia](./clinica-prontuarios-telaestagiário)
+- [clinicapsi-prontuarios-telaestagiário](./clinicapsi-prontuarios-telaestagiário)
 - (novos projetos serão adicionados aqui)  
 
 ## 🚀 Objetivo do Repositório  
