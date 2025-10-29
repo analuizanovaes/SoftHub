@@ -4,530 +4,701 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clínica Psicológica</title>
-
-    <!-- Bootstrap e Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Clínica Psicológica - Prontuário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <!-- Google Font (para o estilo do Figma) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        /* VARIÁVEIS DE CORES */
-        :root {
-            --azul-principal: #004A8F;
-            --dourado-principal: #BC910A;
-            --cinza-fundo: #f4f7f6;
-            --cinza-sidebar: #f8f9fa;
-            --cinza-claro: #f8f9fa;
-            --cinza-medio: #e9ecef;
-            --cinza-escuro: #6c757d;
-            --branco: #ffffff;
-            --preto-texto: #344054;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'azul-uni': '#004A8F',
+                        'dourado-uni': '#BC910A',
+                        'dourado-hover': '#A67C00',
+                        'cinza-claro': '#f4f7f6',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
         }
+    </script>
 
-        /* CSS GERAL */
+    <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--cinza-fundo);
             margin: 0;
             padding: 0;
+            font-family: 'Inter', sans-serif;
         }
 
-        /* CABEÇALHO */
-
-        header {
+        /* Header fixo */
+        .header-fixed {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            height: 64px;
         }
 
-        .logo-cabecalho {
-            height: 60px;
+        /* Espaço para o header fixo */
+        .content-with-header {
+            margin-top: 64px;
         }
 
-        .titulo-cabecalho {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--azul-principal);
-        }
-
-        .botao-cinza-claro {
-            background-color: var(--cinza-claro);
-            border: 1px solid #dee2e6;
-            color: #495057;
-            font-weight: 500;
-        }
-
-        .botao-cinza-claro:hover {
-            background-color: var(--cinza-medio);
-        }
-
-        .botao-cinza-claro i {
-            margin-right: 5px;
-        }
-
-        .inicio-cabecalho,
-        .fim-cabecalho {
-            flex-basis: 200px;
-        }
-
-        .inicio-cabecalho {
-            flex-grow: 0;
-            flex-shrink: 0;
-        }
-
-        .fim-cabecalho {
-            flex-grow: 0;
-            flex-shrink: 0;
+        .document-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            height: 220px;
             display: flex;
-            justify-content: flex-end;
+            flex-direction: column;
         }
 
-        .barra-lateral {
-            background-color: var(--cinza-sidebar);
-            height: calc(100vh - 85px);
-            border-right: 1px solid #dee2e6;
-            padding: 1.5rem 0.2rem;
-            position: sticky;
-            top: 85px;
+        .document-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .document-table th {
+            text-align: left;
+            padding: 4px 4px;
+            border-bottom: 1px solid #d1d5db;
+            font-weight: 500;
+            color: #374151;
+            font-size: 11px;
+        }
+
+        .document-table td {
+            padding: 4px 4px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 11px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .table-container {
+            flex: 1;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .table-scroll {
+            max-height: 100px;
             overflow-y: auto;
         }
 
-        /* Informação do Usuário */
-        .info-usuario {
-            border-bottom: 1px solid #e9ecef;
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .avatar-usuario img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .detalhes-usuario h5 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0;
-            color: var(--azul-principal);
-        }
-
-        .detalhes-usuario p {
-            font-size: 0.85rem;
-            color: var(--dourado-principal);
-            margin-bottom: 0;
+        .btn-primary {
+            background-color: #004A8F;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-weight: 500;
-        }
-
-        /* Navegação */
-        .navegacao-lateral ul {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
-        }
-
-        .navegacao-lateral li a {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 0.4rem;
-            text-decoration: none;
-            color: var(--preto-texto);
-            font-weight: 500;
-            border-radius: 8px;
-            margin-bottom: 4px;
+            font-size: 12px;
             transition: all 0.2s ease;
-            background-color: transparent;
-        }
-
-        .navegacao-lateral li a i {
-            width: 20px;
-            margin-right: 10px;
-            text-align: center;
-            color: #667085;
-        }
-
-        /* Item Ativo */
-        .navegacao-lateral li.ativo a {
-            background-color: var(--branco);
-            color: var(--azul-principal);
-            font-weight: 600;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .navegacao-lateral li.ativo a i {
-            color: var(--azul-principal);
-        }
-
-        /* Hover */
-        .navegacao-lateral li a:hover {
-            background-color: var(--branco);
-        }
-
-        .navegacao-lateral li.ativo a:hover {
-            background-color: var(--branco);
-        }
-
-        .container-fluid {
-            margin-top: 85px;
-            padding: 2rem;
-            background-color: var(--cinza-fundo);
-            min-height: calc(100vh - 85px);
-        }
-
-        .cartao-conteudo {
-            background-color: var(--branco);
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .info-paciente {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .avatar-paciente img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 1.5rem;
-            border: 3px solid var(--dourado-principal);
-        }
-
-        .detalhes-paciente h4 {
-            color: var(--azul-principal);
-            margin-bottom: 0.5rem;
-        }
-
-        .detalhes-paciente p {
-            margin-bottom: 0.25rem;
-        }
-
-        .detalhes-paciente strong {
-            color: var(--dourado-principal);
-        }
-
-        .divisor {
-            border-top: 2px solid var(--dourado-principal);
-            margin: 1.5rem 0;
-        }
-
-        .cartao-documento {
-            border-left: 4px solid var(--azul-principal);
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-            background-color: var(--cinza-claro);
-            border-radius: 0 8px 8px 0;
-            padding: 1rem;
-        }
-
-        .cartao-documento h5 {
-            color: var(--azul-principal);
-            margin-bottom: 0.5rem;
-        }
-
-        .botao-primario-personalizado {
-            background-color: var(--azul-principal);
-            border-color: var(--azul-principal);
-            color: white;
-        }
-
-        .botao-primario-personalizado:hover {
-            background-color: #003a70;
-            border-color: #003a70;
-        }
-
-        .botao-contorno-personalizado {
-            border-color: var(--dourado-principal);
-            color: var(--dourado-principal);
-        }
-
-        .botao-contorno-personalizado:hover {
-            background-color: var(--dourado-principal);
-            color: white;
-        }
-
-        .botao-cancelar {
-            background-color: var(--cinza-escuro);
-            border-color: var(--cinza-escuro);
-            color: white;
-        }
-
-        .botao-cancelar:hover {
-            background-color: #5a6268;
-            border-color: #5a6268;
-        }
-
-        .secao-upload {
-            display: none;
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background-color: var(--cinza-claro);
-            border-radius: 8px;
-            border: 2px dashed var(--dourado-principal);
-        }
-
-        .area-upload {
-            text-align: center;
-            padding: 2rem;
-            border: 2px dashed #dee2e6;
-            border-radius: 8px;
-            margin: 1rem 0;
+            justify-content: center;
+            width: 100%;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            margin-top: auto;
         }
 
-        .area-upload:hover {
-            border-color: var(--dourado-principal);
-            background-color: #fef9eb;
+        .btn-primary:hover {
+            background-color: #003a70;
         }
 
-        .botao-adicionar-doc {
-            background-color: var(--dourado-principal);
-            border-color: var(--dourado-principal);
+        .btn-visualizar {
+            background-color: #BC910A;
             color: white;
-            font-weight: 600;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
-        .botao-adicionar-doc:hover {
-            background-color: #a57d08;
-            border-color: #a57d08;
+        .btn-visualizar:hover {
+            background-color: #A67C00;
         }
 
-        .botoes-acao {
-            display: flex;
-            gap: 10px;
-            margin-top: 1rem;
+        .file-input {
+            display: none;
         }
 
-        /* Títulos e textos principais */
-        h2 {
-            color: var(--azul-principal);
-            font-weight: 700;
+        /* Larguras fixas para as colunas da tabela */
+        .col-nome {
+            width: 45%;
         }
 
-        h3 {
-            color: black;
-            font-weight: 600;
-            margin-bottom: 1rem;
+        .col-data {
+            width: 30%;
         }
 
-        .texto-suave {
-            color: var(--cinza-escuro);
+        .col-acoes {
+            width: 25%;
+        }
+
+        /* Sidebar mobile */
+        @media (max-width: 768px) {
+            .sidebar-mobile {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 50;
+                background: white;
+            }
+
+            .sidebar-mobile.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 40;
+            }
+
+            .sidebar-overlay.open {
+                display: block;
+            }
+
+            h1 {
+                display: none;
+            }
         }
     </style>
 </head>
 
-<body>
+<body class="bg-cinza-claro">
+    <!-- Header Centralizado -->
+    <header class="header-fixed">
+        <div class="flex items-center justify-between px-4 md:px-6 h-full">
+            <!-- Logo e botão menu mobile -->
+            <div class="flex items-center gap-3">
+                <!-- Botão menu mobile -->
+                <button id="menu-button" class="md:hidden text-azul-uni p-2">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+                <!-- IMAGEM DO LOGO -->
+                <img src="imagens/logo (2).png" alt="Logo UNIEURO" class="h-12 md:h-14 w-auto">
+            </div>
 
-    <!-- CABEÇALHO -->
-    <header class="
-        p-3             
-        bg-white        
-        border-bottom   
-        shadow-sm       
-        d-flex          
-        align-items-center
-        justify-content-between 
-    ">
-        <div class="inicio-cabecalho">
-            <img src="imagens/logo (2).png" alt="Logo Unieuro" class="logo-cabecalho">
-        </div>
+            <!-- Título centralizado -->
+            <div class="absolute left-1/2 transform -translate-x-1/2">
+                <h1 class="text-lg font-bold text-azul-uni">Clínica Psicológica</h1>
+            </div>
 
-        <div class="header-center flex-grow-1 text-center">
-            <h1 class="titulo-cabecalho m-0">Clínica Psicológica</h1>
-        </div>
-
-        <div class="fim-cabecalho">
-            <div class="input-group" style="width: 250px;">
-                <input type="text" class="form-control" placeholder="Pesquisar...">
-                <button class="btn botao-primario-personalizado" type="button">
-                    <i class="fas fa-search"></i>
+            <!-- Barra de pesquisa à direita -->
+            <div class="flex items-center gap-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Pesquisar..."
+                        class="w-48 lg:w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-azul-uni focus:border-transparent bg-gray-50">
+                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </div>
+                </div>
+                <!-- Botão pesquisa mobile -->
+                <button class="md:hidden text-azul-uni p-2">
+                    <i class="fas fa-search text-lg"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- ESTRUTURA DA PÁGINA -->
-    <div class="container-fluid">
-        <div class="row">
+    <!-- Overlay para mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-            <!-- BARRA LATERAL -->
-            <nav class="col-md-3 col-lg-2 d-md-block barra-lateral">
+    <div class="flex content-with-header">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="sidebar-mobile w-64 md:w-64 bg-white border-r border-gray-200 min-h-screen fixed md:relative z-50 md:z-auto">
+            <div class="p-4 md:p-6">
+                <!-- Botão fechar mobile -->
+                <div class="flex justify-between items-center md:hidden pb-4">
+                    <h2 class="font-semibold text-azul-uni">Menu</h2>
+                    <button id="close-menu" class="text-azul-uni p-2">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
 
-                <!-- Info do Usuário -->
-                <div class="info-usuario d-flex align-items-center">
-                    <div class="avatar-usuario me-3">
-                        <img src="imagens/imagemEstagiário.png" alt="Lucas Carvalho">
-                    </div>
-                    <div class="detalhes-usuario">
-                        <h5>Lucas Carvalho</h5>
-                        <p>Estagiário de Psicologia</p>
+                <!-- Informações do Usuário -->
+                <div class="flex items-center gap-3 pb-6 border-b border-gray-100">
+                    <!-- IMAGEM DO USUÁRIO -->
+                    <img src="imagens/imagemEstagiário.png" alt="Lucas Carvalho"
+                        class="w-16 h-16 md:w-12 md:h-12 rounded-full object-cover border-2 border-azul-uni">
+                    <div>
+                        <h3 class="font-semibold text-azul-uni">Lucas Carvalho</h3>
+                        <p class="text-sm text-dourado-uni font-medium">Estagiário de Psicologia</p>
                     </div>
                 </div>
 
-                <!-- Lista de Navegação -->
-                <div class="navegacao-lateral">
-                    <ul>
+                <!-- Menu de Navegação -->
+                <nav class="mt-6">
+                    <ul class="space-y-2">
                         <li>
-                            <a href="#"><i class="fas fa-home"></i> Início</a>
-                        </li>
-                        <li class="ativo">
-                            <a href="#"><i class="fas fa-file-medical"></i> Prontuários</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fas fa-users"></i> Seleção de Inscritos</a>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-home w-5"></i>
+                                <span>Início</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-door-open"></i> Visualização de Salas</a>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 bg-blue-50 text-azul-uni font-semibold rounded-lg">
+                                <i class="fas fa-file-medical w-5"></i>
+                                <span>Prontuários</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-calendar-check"></i> Consultas Agendadas</a>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-users w-5"></i>
+                                <span>Seleção de Inscritos</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-chart-bar"></i> Gerar Relatório Acadêmico</a>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-door-open w-5"></i>
+                                <span>Visualização de Salas</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fas fa-user"></i> Perfil</a>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-calendar-check w-5"></i>
+                                <span>Consultas Agendadas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-chart-bar w-5"></i>
+                                <span>Gerar Relatório</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-user w-5"></i>
+                                <span>Perfil</span>
+                            </a>
                         </li>
                     </ul>
-                </div>
-            </nav>
+                </nav>
+            </div>
+        </aside>
 
-            <!-- ÁREA DE CONTEÚDO PRINCIPAL -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 conteudo-principal">
-                <div class="cartao-conteudo">
-                    <h2>Painel do Estagiário de Psicologia</h2>
-                    <p class="texto-suave">Gerencie prontuários, relatórios e documentos para consulta.</p>
+        <!-- Conteúdo Principal -->
+        <main class="flex-1 p-4 md:p-8">
+            <!-- Cabeçalho do Conteúdo -->
+            <div class="mb-6 md:mb-8">
+                <h2 class="text-xl md:text-2xl font-bold text-azul-uni mb-2">Painel do Estagiário de Psicologia</h2>
+                <p class="text-sm md:text-base text-gray-600">Gerencie prontuários, relatórios e documentos para
+                    consulta.</p>
+            </div>
 
-                    <div class="divisor"></div>
-
-                    <h3>Prontuário Paciente</h3>
-
-                    <div class="info-paciente">
-                        <div class="avatar-paciente">
-                            <img src="imagens/paciente.png" alt="Rafael Costa">
+            <!-- Informações do Paciente -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 md:p-6 mb-6 md:mb-8">
+                <h3 class="text-lg md:text-xl font-semibold text-azul-uni mb-3 md:mb-4">Prontuário Paciente</h3>
+                <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+                    <!-- IMAGEM DO PACIENTE -->
+                    <img src="imagens/paciente.png" alt="Rafael Costa"
+                        class="w-24 h-24 md:w-24 md:h-24 rounded-full border-4 border-dourado-uni object-cover">
+                    <div class="text-center md:text-left">
+                        <!-- NOME DO PACIENTE EM NEGRITO E MAIOR -->
+                        <p class="text-azul-uni text-lg md:text-xl font-bold mb-2 md:mb-3">Rafael Costa</p>
+                        <div class="space-y-1">
+                            <p class="text-gray-700 text-sm md:text-base"><span
+                                    class="font-medium text-dourado-uni">Contato:</span> (61) 300000-0000</p>
+                            <p class="text-gray-700 text-sm md:text-base"><span
+                                    class="font-medium text-dourado-uni">Email:</span> daniel.almeida@email.com</p>
+                            <p class="text-gray-700 text-sm md:text-base"><span
+                                    class="font-medium text-dourado-uni">Idade:</span> 35 anos</p>
                         </div>
-                        <div class="detalhes-paciente">
-                            <h4>Rafael Costa</h4>
-                            <p><strong>Convênio:</strong> xxxxxxxxx</p>
-                            <p><strong>Data de nascimento:</strong> xx/xx/xxxx</p>
-                            <p><strong>CPF:</strong> xxx.xxx.xxx-xx</p>
-                        </div>
-                    </div>
-
-                    <div class="divisor"></div>
-
-                    <h3>Documentos do Paciente Selecionado</h3>
-
-                    <!-- Área de anotações (conforme o Figma) -->
-                    <div id="area-anotacoes">
-                        <!-- Primeira anotação (sem botão remover) -->
-                        <div class="cartao-documento">
-                            <h5>Anotação 1</h5>
-                            <p class="texto-suave">Adicionado em: 14/05/2025</p>
-                            <div>
-                                <button class="btn botao-primario-personalizado btn-sm">Visualizar</button>
-                                <button class="btn botao-contorno-personalizado btn-sm"
-                                    onclick="alternarSecaoUpload()">Editar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Seção de Upload (inicialmente oculta) -->
-                    <div id="secaoUpload" class="secao-upload">
-                        <h5>Carregar arquivos para o prontuário</h5>
-                        <p class="texto-suave">Você pode fazer upload de até 10 arquivos por vez, e cada arquivo pode
-                            ter até 25 MB.</p>
-
-                        <div class="area-upload">
-                            <i class="fas fa-cloud-upload-alt fa-2x mb-3" style="color: var(--dourado-principal);"></i>
-                            <p>Arraste e solte arquivos aqui...</p>
-                            <p class="texto-suave small">ou</p>
-                            <button class="btn botao-primario-personalizado">Selecionar arquivos</button>
-                        </div>
-
-                        <div class="botoes-acao">
-                            <button class="btn botao-cancelar" onclick="alternarSecaoUpload()">Cancelar</button>
-                            <button class="btn botao-primario-personalizado">Salvar</button>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-4">
-                        <button class="btn botao-adicionar-doc" onclick="adicionarNovaAnotacao()">
-                            <i class="fas fa-plus"></i> Adicionar Nova Anotação
-                        </button>
                     </div>
                 </div>
-            </main>
+            </div>
 
-        </div>
+            <!-- Cartões de Documentos - PRIMEIRA LINHA -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
+                <!-- Ficha de Frequência -->
+                <div class="document-card p-4">
+                    <h5 class="font-semibold text-base text-azul-uni mb-2">Ficha de Frequência</h5>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                            <table class="document-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-nome">Nome</th>
+                                        <th class="col-data">Data</th>
+                                        <th class="col-acoes">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="frequencia-body">
+                                    <!-- Conteúdo será preenchido via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="file" id="frequencia-file" class="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                    <button onclick="document.getElementById('frequencia-file').click()" class="btn-primary">
+                        <i class="fas fa-plus mr-2"></i>Inserir
+                    </button>
+                </div>
+
+                <!-- Ficha de Inscrição -->
+                <div class="document-card p-4">
+                    <h5 class="font-semibold text-base text-azul-uni mb-2">Ficha de Inscrição</h5>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                            <table class="document-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-nome">Nome</th>
+                                        <th class="col-data">Data</th>
+                                        <th class="col-acoes">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inscricao-body">
+                                    <tr>
+                                        <td class="col-nome"><strong>Inscrição de Daniel Almeida</strong></td>
+                                        <td class="col-data">25/06/2025</td>
+                                        <td class="col-acoes">
+                                            <button class="btn-visualizar"
+                                                onclick="visualizarArquivo('Inscrição de Daniel Almeida')">
+                                                Visualizar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="file" id="inscricao-file" class="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                    <button onclick="document.getElementById('inscricao-file').click()" class="btn-primary">
+                        <i class="fas fa-plus mr-2"></i>Inserir
+                    </button>
+                </div>
+
+                <!-- TCLE -->
+                <div class="document-card p-4">
+                    <h5 class="font-semibold text-base text-azul-uni mb-2">TCLE</h5>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                            <table class="document-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-nome">Nome</th>
+                                        <th class="col-data">Data</th>
+                                        <th class="col-acoes">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tcle-body">
+                                    <!-- Conteúdo será preenchido via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="file" id="tcle-file" class="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                    <button onclick="document.getElementById('tcle-file').click()" class="btn-primary">
+                        <i class="fas fa-plus mr-2"></i>Inserir
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cartões de Documentos - SEGUNDA LINHA -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+                <!-- Folha de Evolução -->
+                <div class="document-card p-4">
+                    <h5 class="font-semibold text-base text-azul-uni mb-2">Folha de Evolução</h5>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                            <table class="document-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-nome">Nome</th>
+                                        <th class="col-data">Data</th>
+                                        <th class="col-acoes">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="evolucao-body">
+                                    <!-- Conteúdo será preenchido via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="file" id="evolucao-file" class="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                    <button onclick="document.getElementById('evolucao-file').click()" class="btn-primary">
+                        <i class="fas fa-plus mr-2"></i>Inserir
+                    </button>
+                </div>
+
+                <!-- Anamnese -->
+                <div class="document-card p-4">
+                    <h5 class="font-semibold text-base text-azul-uni mb-2">Anamnese</h5>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                            <table class="document-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-nome">Nome</th>
+                                        <th class="col-data">Data</th>
+                                        <th class="col-acoes">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="anamnese-body">
+                                    <!-- Conteúdo será preenchido via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="file" id="anamnese-file" class="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                    <button onclick="document.getElementById('anamnese-file').click()" class="btn-primary">
+                        <i class="fas fa-plus mr-2"></i>Inserir
+                    </button>
+                </div>
+
+                <!-- Histórico de Ocorrência -->
+                <div class="document-card p-4">
+                    <h5 class="font-semibold text-base text-azul-uni mb-2">Histórico de Ocorrência</h5>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                            <table class="document-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-nome">Nome</th>
+                                        <th class="col-data">Data</th>
+                                        <th class="col-acoes">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ocorrencia-body">
+                                    <!-- Conteúdo será preenchido via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="file" id="ocorrencia-file" class="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                    <button onclick="document.getElementById('ocorrencia-file').click()" class="btn-primary">
+                        <i class="fas fa-plus mr-2"></i>Inserir
+                    </button>
+                </div>
+
+                <!-- Laudos Médicos -->
+                <div class="document-card p-4">
+                    <h5 class="font-semibold text-base text-azul-uni mb-2">Laudos Médicos</h5>
+                    <div class="table-container">
+                        <div class="table-scroll">
+                            <table class="document-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-nome">Nome</th>
+                                        <th class="col-data">Data</th>
+                                        <th class="col-acoes">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="laudos-body">
+                                    <!-- Conteúdo será preenchido via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="file" id="laudos-file" class="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                    <button onclick="document.getElementById('laudos-file').click()" class="btn-primary">
+                        <i class="fas fa-plus mr-2"></i>Inserir
+                    </button>
+                </div>
+            </div>
+
+            <!-- Botões de Ação Gerais -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mt-8">
+                <div class="text-center mb-4">
+                    <div class="text-lg font-semibold text-azul-uni mb-2">
+                        Status dos Documentos
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <span id="documentos-preenchidos" class="font-bold text-azul-uni">0</span> de 7 documentos
+                        preenchidos
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                    <button id="btn-enviar-tudo"
+                        class="bg-azul-uni hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 flex items-center justify-center gap-3 text-base min-w-48"
+                        disabled>
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Tudo
+                    </button>
+
+                    <button id="btn-cancelar-tudo"
+                        class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-3 text-base min-w-48">
+                        <i class="fas fa-times"></i>
+                        Cancelar Tudo
+                    </button>
+                </div>
+
+                <!-- Barra de progresso -->
+                <div class="mt-4">
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progress-bar" class="bg-dourado-uni h-2 rounded-full transition-all duration-500"
+                            style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // Contador para numerar as anotações
-        let contadorAnotacoes = 2;
-
-        // Função para mostrar/ocultar a seção de upload
-        function alternarSecaoUpload() {
-            const secaoUpload = document.getElementById('secaoUpload');
-            if (secaoUpload.style.display === 'none' || secaoUpload.style.display === '') {
-                secaoUpload.style.display = 'block';
-            } else {
-                secaoUpload.style.display = 'none';
-            }
-        }
-
-        // Função para adicionar nova anotação
-        function adicionarNovaAnotacao() {
-            const areaAnotacoes = document.getElementById('area-anotacoes');
-            const novaAnotacao = document.createElement('div');
-            novaAnotacao.className = 'cartao-documento';
-            novaAnotacao.innerHTML = `
-                <h5>Anotação ${contadorAnotacoes}</h5>
-                <p class="texto-suave">Adicionado em: ${obterDataAtual()}</p>
-                <div>
-                    <button class="btn botao-primario-personalizado btn-sm">Visualizar</button>
-                    <button class="btn botao-contorno-personalizado btn-sm" onclick="alternarSecaoUpload()">Editar</button>
-                    <button class="btn botao-cancelar btn-sm" onclick="removerAnotacao(this)">Remover</button>
-                </div>
-            `;
-            areaAnotacoes.appendChild(novaAnotacao);
-            contadorAnotacoes++;
-        }
-
-        // Função para remover anotação (apenas para anotações adicionadas)
-        function removerAnotacao(botao) {
-            const anotacao = botao.closest('.cartao-documento');
-            anotacao.remove();
-        }
-
-        // Função para obter data atual
-        function obterDataAtual() {
-            const data = new Date();
-            return data.toLocaleDateString('pt-BR');
-        }
-
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('secaoUpload').style.display = 'none';
+        // Controle do menu mobile
+        document.getElementById('menu-button').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebar-overlay').classList.add('open');
         });
+
+        document.getElementById('close-menu').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebar-overlay').classList.remove('open');
+        });
+
+        document.getElementById('sidebar-overlay').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.remove('open');
+            this.classList.remove('open');
+        });
+
+        // Contador de documentos preenchidos
+        let documentosPreenchidos = 0;
+        const totalDocumentos = 7;
+
+        // Função para verificar se um documento tem arquivo
+        function verificarDocumentoPreenchido(tableBodyId) {
+            const tableBody = document.getElementById(tableBodyId);
+            return tableBody.children.length > 0;
+        }
+
+        // Função para atualizar contador
+        function atualizarContador() {
+            const documentos = [
+                'frequencia-body', 'inscricao-body', 'tcle-body',
+                'evolucao-body', 'anamnese-body', 'ocorrencia-body', 'laudos-body'
+            ];
+
+            documentosPreenchidos = documentos.filter(id => verificarDocumentoPreenchido(id)).length;
+
+            document.getElementById('documentos-preenchidos').textContent = documentosPreenchidos;
+
+            // Atualizar barra de progresso
+            const progresso = (documentosPreenchidos / totalDocumentos) * 100;
+            document.getElementById('progress-bar').style.width = `${progresso}%`;
+
+            // Habilitar/desabilitar botão enviar
+            const btnEnviar = document.getElementById('btn-enviar-tudo');
+            btnEnviar.disabled = documentosPreenchidos !== totalDocumentos;
+        }
+
+        // Configurar os event listeners para TODOS os inputs de arquivo
+        const fileInputs = [
+            { id: 'frequencia-file', tableId: 'frequencia-body', type: 'Ficha de Frequência' },
+            { id: 'inscricao-file', tableId: 'inscricao-body', type: 'Ficha de Inscrição' },
+            { id: 'tcle-file', tableId: 'tcle-body', type: 'TCLE' },
+            { id: 'evolucao-file', tableId: 'evolucao-body', type: 'Folha de Evolução' },
+            { id: 'anamnese-file', tableId: 'anamnese-body', type: 'Anamnese' },
+            { id: 'ocorrencia-file', tableId: 'ocorrencia-body', type: 'Histórico de Ocorrência' },
+            { id: 'laudos-file', tableId: 'laudos-body', type: 'Laudos Médicos' }
+        ];
+
+        fileInputs.forEach(input => {
+            document.getElementById(input.id).addEventListener('change', function (e) {
+                handleFileUpload(e, input.tableId, input.type);
+                atualizarContador();
+            });
+        });
+
+        // Função para lidar com o upload de arquivos
+        function handleFileUpload(event, tableBodyId, documentType) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const tableBody = document.getElementById(tableBodyId);
+
+            // Criar nova linha na tabela
+            const newRow = document.createElement('tr');
+            const fileName = file.name;
+            const fileDate = new Date().toLocaleDateString('pt-BR');
+
+            newRow.innerHTML = `
+                <td class="col-nome"><strong>${fileName}</strong></td>
+                <td class="col-data">${fileDate}</td>
+                <td class="col-acoes">
+                    <button class="btn-visualizar" onclick="visualizarArquivo('${fileName}')">
+                        Visualizar
+                    </button>
+                </td>
+            `;
+
+            // Adicionar a nova linha à tabela
+            tableBody.appendChild(newRow);
+
+            // Limpar o input para permitir upload do mesmo arquivo novamente
+            event.target.value = '';
+        }
+
+        // Função para visualizar arquivo
+        function visualizarArquivo(fileName) {
+            alert(`Visualizando arquivo: ${fileName}\n\nEm uma implementação real, este arquivo seria aberto em uma nova aba ou visualizador.`);
+        }
+
+        // Botão enviar tudo
+        document.getElementById('btn-enviar-tudo').addEventListener('click', function () {
+            if (documentosPreenchidos === totalDocumentos) {
+                alert('Todos os documentos foram enviados com sucesso!');
+                // Aqui você pode adicionar a lógica para enviar os dados
+            }
+        });
+
+        // Botão cancelar tudo
+        document.getElementById('btn-cancelar-tudo').addEventListener('click', function () {
+            if (confirm('Tem certeza que deseja cancelar todos os documentos?')) {
+                const documentos = [
+                    'frequencia-body', 'inscricao-body', 'tcle-body',
+                    'evolucao-body', 'anamnese-body', 'ocorrencia-body', 'laudos-body'
+                ];
+
+                documentos.forEach(id => {
+                    const tableBody = document.getElementById(id);
+                    tableBody.innerHTML = '';
+                });
+
+                atualizarContador();
+                alert('Todos os documentos foram removidos!');
+            }
+        });
+
+        // Inicializar contador
+        atualizarContador();
     </script>
 </body>
 
 </html>
-
-agora a tela todinha congelou
