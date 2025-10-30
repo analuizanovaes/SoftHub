@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clínica Psicológica - Prontuário</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -27,169 +28,6 @@
         }
     </script>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Header fixo */
-        .header-fixed {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            height: 64px;
-        }
-
-        /* Espaço para o header fixo */
-        .content-with-header {
-            margin-top: 64px;
-        }
-
-        .document-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e5e7eb;
-            height: 220px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .document-table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-
-        .document-table th {
-            text-align: left;
-            padding: 4px 4px;
-            border-bottom: 1px solid #d1d5db;
-            font-weight: 500;
-            color: #374151;
-            font-size: 11px;
-        }
-
-        .document-table td {
-            padding: 4px 4px;
-            border-bottom: 1px solid #e5e7eb;
-            color: #6b7280;
-            font-size: 11px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .table-container {
-            flex: 1;
-            overflow: hidden;
-            margin-bottom: 8px;
-        }
-
-        .table-scroll {
-            max-height: 100px;
-            overflow-y: auto;
-        }
-
-        .btn-primary {
-            background-color: #004A8F;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 12px;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            border: none;
-            cursor: pointer;
-            margin-top: auto;
-        }
-
-        .btn-primary:hover {
-            background-color: #003a70;
-        }
-
-        .btn-visualizar {
-            background-color: #BC910A;
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .btn-visualizar:hover {
-            background-color: #A67C00;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        /* Larguras fixas para as colunas da tabela */
-        .col-nome {
-            width: 45%;
-        }
-
-        .col-data {
-            width: 30%;
-        }
-
-        .col-acoes {
-            width: 25%;
-        }
-
-        /* Sidebar mobile */
-        @media (max-width: 768px) {
-            .sidebar-mobile {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out;
-                position: fixed;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                z-index: 50;
-                background: white;
-            }
-
-            .sidebar-mobile.open {
-                transform: translateX(0);
-            }
-
-            .sidebar-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 40;
-            }
-
-            .sidebar-overlay.open {
-                display: block;
-            }
-
-            h1 {
-                display: none;
-            }
-        }
-    </style>
 </head>
 
 <body class="bg-cinza-claro">
@@ -211,18 +49,12 @@
                 <h1 class="text-lg font-bold text-azul-uni">Clínica Psicológica</h1>
             </div>
 
-            <!-- Barra de pesquisa à direita -->
+            <!-- Botão sair à direita -->
             <div class="flex items-center gap-4">
-                <div class="relative hidden md:block">
-                    <input type="text" placeholder="Pesquisar..."
-                        class="w-48 lg:w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-azul-uni focus:border-transparent bg-gray-50">
-                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
-                        <i class="fas fa-search text-gray-400"></i>
-                    </div>
-                </div>
-                <!-- Botão pesquisa mobile -->
-                <button class="md:hidden text-azul-uni p-2">
-                    <i class="fas fa-search text-lg"></i>
+                <!-- Botão Sair -->
+                <button class="btn-sair" onclick="sair()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
                 </button>
             </div>
         </div>
@@ -251,7 +83,7 @@
                         class="w-16 h-16 md:w-12 md:h-12 rounded-full object-cover border-2 border-azul-uni">
                     <div>
                         <h3 class="font-semibold text-azul-uni">Lucas Carvalho</h3>
-                        <p class="text-sm text-dourado-uni font-medium">Estagiário de Psicologia</p>
+                        <p class="text-sm text-dourado-uni font-medium">Estagiário</p>
                     </div>
                 </div>
 
@@ -335,9 +167,9 @@
                             <p class="text-gray-700 text-sm md:text-base"><span
                                     class="font-medium text-dourado-uni">Contato:</span> (61) 300000-0000</p>
                             <p class="text-gray-700 text-sm md:text-base"><span
-                                    class="font-medium text-dourado-uni">Email:</span> daniel.almeida@email.com</p>
+                                    class="font-medium text-dourado-uni">Email:</span> rafael.costa@gmail.com</p>
                             <p class="text-gray-700 text-sm md:text-base"><span
-                                    class="font-medium text-dourado-uni">Idade:</span> 35 anos</p>
+                                    class="font-medium text-dourado-uni">Idade:</span> 32 anos</p>
                         </div>
                     </div>
                 </div>
@@ -398,10 +230,7 @@
                             </table>
                         </div>
                     </div>
-                    <input type="file" id="inscricao-file" class="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
-                    <button onclick="document.getElementById('inscricao-file').click()" class="btn-primary">
-                        <i class="fas fa-plus mr-2"></i>Inserir
-                    </button>
+                    <!-- Botão de inserir removido conforme solicitado -->
                 </div>
 
                 <!-- TCLE -->
@@ -546,17 +375,16 @@
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
-                    <button id="btn-enviar-tudo"
-                        class="bg-azul-uni hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 flex items-center justify-center gap-3 text-base min-w-48"
-                        disabled>
-                        <i class="fas fa-paper-plane"></i>
-                        Enviar Tudo
+                    <button id="btn-salvar"
+                        class="bg-azul-uni hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-3 text-base min-w-48">
+                        <i class="fas fa-save"></i>
+                        Salvar
                     </button>
 
-                    <button id="btn-cancelar-tudo"
+                    <button id="btn-cancelar"
                         class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-3 text-base min-w-48">
                         <i class="fas fa-times"></i>
-                        Cancelar Tudo
+                        Cancelar
                     </button>
                 </div>
 
@@ -570,135 +398,7 @@
             </div>
         </main>
     </div>
-
-    <script>
-        // Controle do menu mobile
-        document.getElementById('menu-button').addEventListener('click', function () {
-            document.getElementById('sidebar').classList.add('open');
-            document.getElementById('sidebar-overlay').classList.add('open');
-        });
-
-        document.getElementById('close-menu').addEventListener('click', function () {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sidebar-overlay').classList.remove('open');
-        });
-
-        document.getElementById('sidebar-overlay').addEventListener('click', function () {
-            document.getElementById('sidebar').classList.remove('open');
-            this.classList.remove('open');
-        });
-
-        // Contador de documentos preenchidos
-        let documentosPreenchidos = 0;
-        const totalDocumentos = 7;
-
-        // Função para verificar se um documento tem arquivo
-        function verificarDocumentoPreenchido(tableBodyId) {
-            const tableBody = document.getElementById(tableBodyId);
-            return tableBody.children.length > 0;
-        }
-
-        // Função para atualizar contador
-        function atualizarContador() {
-            const documentos = [
-                'frequencia-body', 'inscricao-body', 'tcle-body',
-                'evolucao-body', 'anamnese-body', 'ocorrencia-body', 'laudos-body'
-            ];
-
-            documentosPreenchidos = documentos.filter(id => verificarDocumentoPreenchido(id)).length;
-
-            document.getElementById('documentos-preenchidos').textContent = documentosPreenchidos;
-
-            // Atualizar barra de progresso
-            const progresso = (documentosPreenchidos / totalDocumentos) * 100;
-            document.getElementById('progress-bar').style.width = `${progresso}%`;
-
-            // Habilitar/desabilitar botão enviar
-            const btnEnviar = document.getElementById('btn-enviar-tudo');
-            btnEnviar.disabled = documentosPreenchidos !== totalDocumentos;
-        }
-
-        // Configurar os event listeners para TODOS os inputs de arquivo
-        const fileInputs = [
-            { id: 'frequencia-file', tableId: 'frequencia-body', type: 'Ficha de Frequência' },
-            { id: 'inscricao-file', tableId: 'inscricao-body', type: 'Ficha de Inscrição' },
-            { id: 'tcle-file', tableId: 'tcle-body', type: 'TCLE' },
-            { id: 'evolucao-file', tableId: 'evolucao-body', type: 'Folha de Evolução' },
-            { id: 'anamnese-file', tableId: 'anamnese-body', type: 'Anamnese' },
-            { id: 'ocorrencia-file', tableId: 'ocorrencia-body', type: 'Histórico de Ocorrência' },
-            { id: 'laudos-file', tableId: 'laudos-body', type: 'Laudos Médicos' }
-        ];
-
-        fileInputs.forEach(input => {
-            document.getElementById(input.id).addEventListener('change', function (e) {
-                handleFileUpload(e, input.tableId, input.type);
-                atualizarContador();
-            });
-        });
-
-        // Função para lidar com o upload de arquivos
-        function handleFileUpload(event, tableBodyId, documentType) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const tableBody = document.getElementById(tableBodyId);
-
-            // Criar nova linha na tabela
-            const newRow = document.createElement('tr');
-            const fileName = file.name;
-            const fileDate = new Date().toLocaleDateString('pt-BR');
-
-            newRow.innerHTML = `
-                <td class="col-nome"><strong>${fileName}</strong></td>
-                <td class="col-data">${fileDate}</td>
-                <td class="col-acoes">
-                    <button class="btn-visualizar" onclick="visualizarArquivo('${fileName}')">
-                        Visualizar
-                    </button>
-                </td>
-            `;
-
-            // Adicionar a nova linha à tabela
-            tableBody.appendChild(newRow);
-
-            // Limpar o input para permitir upload do mesmo arquivo novamente
-            event.target.value = '';
-        }
-
-        // Função para visualizar arquivo
-        function visualizarArquivo(fileName) {
-            alert(`Visualizando arquivo: ${fileName}\n\nEm uma implementação real, este arquivo seria aberto em uma nova aba ou visualizador.`);
-        }
-
-        // Botão enviar tudo
-        document.getElementById('btn-enviar-tudo').addEventListener('click', function () {
-            if (documentosPreenchidos === totalDocumentos) {
-                alert('Todos os documentos foram enviados com sucesso!');
-                // Aqui você pode adicionar a lógica para enviar os dados
-            }
-        });
-
-        // Botão cancelar tudo
-        document.getElementById('btn-cancelar-tudo').addEventListener('click', function () {
-            if (confirm('Tem certeza que deseja cancelar todos os documentos?')) {
-                const documentos = [
-                    'frequencia-body', 'inscricao-body', 'tcle-body',
-                    'evolucao-body', 'anamnese-body', 'ocorrencia-body', 'laudos-body'
-                ];
-
-                documentos.forEach(id => {
-                    const tableBody = document.getElementById(id);
-                    tableBody.innerHTML = '';
-                });
-
-                atualizarContador();
-                alert('Todos os documentos foram removidos!');
-            }
-        });
-
-        // Inicializar contador
-        atualizarContador();
-    </script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
