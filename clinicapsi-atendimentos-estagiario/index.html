@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Psicológica - Consultas Agendadas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'azul-uni': '#004A8F',
+                        'dourado-uni': '#BC910A',
+                        'dourado-hover': '#A67C00',
+                        'cinza-claro': '#f4f7f6',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-cinza-claro">
+    <!-- Header Centralizado -->
+    <header class="header-fixed">
+        <div class="flex items-center justify-between px-4 md:px-6 h-full">
+            <!-- Logo e botão menu mobile -->
+            <div class="flex items-center gap-3">
+                <!-- Botão menu mobile -->
+                <button id="menu-button" class="md:hidden text-azul-uni p-2">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+                <!-- IMAGEM DO LOGO -->
+                <img src="imagens/logo (2).png" alt="Logo UNIEURO" class="h-12 md:h-14 w-auto">
+            </div>
+
+            <!-- Título centralizado -->
+            <div class="absolute left-1/2 transform -translate-x-1/2">
+                <h1 class="text-lg font-bold text-azul-uni">Clínica Psicológica</h1>
+            </div>
+
+            <!-- Botão Sair no lugar da barra de pesquisa -->
+            <div class="flex items-center gap-4">
+                <button id="logout-button"
+                    class="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="hidden md:inline">Sair</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overlay para mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <div class="flex content-with-header">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="sidebar-mobile w-64 md:w-64 bg-white border-r border-gray-200 min-h-screen fixed md:relative z-50 md:z-auto">
+            <div class="p-4 md:p-6">
+                <!-- Botão fechar mobile -->
+                <div class="flex justify-between items-center md:hidden pb-4">
+                    <h2 class="font-semibold text-azul-uni">Menu</h2>
+                    <button id="close-menu" class="text-azul-uni p-2">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Informações do Usuário -->
+                <div class="flex items-center gap-3 pb-6 border-b border-gray-100">
+                    <!-- IMAGEM DO USUÁRIO -->
+                    <img src="imagens/imagemEstagiário.png" alt="Lucas Carvalho"
+                        class="w-16 h-16 md:w-12 md:h-12 rounded-full object-cover border-2 border-azul-uni">
+                    <div>
+                        <h3 class="font-semibold text-azul-uni">Lucas Carvalho</h3>
+                        <p class="text-sm text-dourado-uni font-medium">Estagiário</p>
+                    </div>
+                </div>
+
+                <!-- Menu de Navegação -->
+                <nav class="mt-6">
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-home w-5"></i>
+                                <span>Início</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-file-medical w-5"></i>
+                                <span>Prontuários</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-users w-5"></i>
+                                <span>Seleção de Inscritos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-door-open w-5"></i>
+                                <span>Visualização de Salas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 bg-blue-50 text-azul-uni font-semibold rounded-lg">
+                                <i class="fas fa-calendar-check w-5"></i>
+                                <span>Consultas Agendadas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-chart-bar w-5"></i>
+                                <span>Gerar Relatório</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-user w-5"></i>
+                                <span>Perfil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="flex-1 p-4 md:p-6">
+            <div class="max-w-7xl mx-auto">
+                <!-- Cabeçalho da Página -->
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-azul-uni">Consultas Agendadas</h2>
+                    <p class="text-gray-600">Gerencie seus compromissos diários e consultas de pacientes</p>
+                </div>
+
+                <!-- Data Atual -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+                    <h3 id="current-date" class="text-lg font-semibold text-azul-uni mb-2"></h3>
+                    <div class="flex items-center gap-2 text-gray-600">
+                        <i class="fas fa-calendar-day text-dourado-uni"></i>
+                        <span id="appointments-count">5 consultas agendadas para hoje (1 cancelada)</span>
+                    </div>
+                </div>
+
+                <!-- Layout Principal: Calendário + Consultas -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Coluna 1: Calendário -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 id="calendar-month" class="font-semibold text-azul-uni"></h3>
+                                <div class="flex gap-2">
+                                    <button id="prev-month" class="p-2 text-gray-500 hover:text-azul-uni">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button id="next-month" class="p-2 text-gray-500 hover:text-azul-uni">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Dias da semana -->
+                            <div class="grid grid-cols-7 gap-1 mb-2">
+                                <div class="text-center text-xs font-medium text-gray-500 py-1">Dom</div>
+                                <div class="text-center text-xs font-medium text-gray-500 py-1">Seg</div>
+                                <div class="text-center text-xs font-medium text-gray-500 py-1">Ter</div>
+                                <div class="text-center text-xs font-medium text-gray-500 py-1">Qua</div>
+                                <div class="text-center text-xs font-medium text-gray-500 py-1">Qui</div>
+                                <div class="text-center text-xs font-medium text-gray-500 py-1">Sex</div>
+                                <div class="text-center text-xs font-medium text-gray-500 py-1">Sáb</div>
+                            </div>
+
+                            <!-- Dias do mês -->
+                            <div id="calendar-days" class="grid grid-cols-7 gap-1">
+                                <!-- Os dias serão gerados dinamicamente via JavaScript -->
+                            </div>
+
+                            <!-- Estatísticas rápidas -->
+                            <div class="mt-6 pt-4 border-t border-gray-200">
+                                <h4 class="font-medium text-azul-uni mb-3">Resumo do Dia</h4>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-600">Confirmadas:</span>
+                                        <span class="font-medium">3</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-600">Pendentes:</span>
+                                        <span class="font-medium">1</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-600">Canceladas:</span>
+                                        <span class="font-medium text-red-600">1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna 2: Lista de Consultas -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-semibold text-azul-uni">Consultas de Hoje</h3>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="px-3 py-1 text-sm border border-gray-300 rounded-lg hover:bg-gray-50">
+                                        <i class="fas fa-filter mr-1"></i> Filtrar
+                                    </button>
+                                    <button
+                                        class="px-3 py-1 text-sm bg-azul-uni text-white rounded-lg hover:bg-blue-800">
+                                        <i class="fas fa-plus mr-1"></i> Nova Consulta
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Lista de Consultas -->
+                            <div class="space-y-4">
+                                <!-- Consulta 1 - CONFIRMADA -->
+                                <div class="appointment-card confirmed bg-white rounded-lg border border-gray-200 p-4">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <span class="status-badge status-confirmed">Confirmado</span>
+                                                <span class="text-xs text-gray-500">09:00 (60 min)</span>
+                                            </div>
+                                            <h4 class="font-semibold text-azul-uni">Maria Silva</h4>
+                                            <p class="text-sm text-gray-600 mb-1">Primeira consulta</p>
+                                            <div class="flex items-center gap-1 text-sm text-gray-500">
+                                                <i class="fas fa-phone"></i>
+                                                <span>+1 (555) 123-4567</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="p-2 text-azul-uni hover:bg-blue-50 rounded-lg">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Consulta 2 - PENDENTE -->
+                                <div class="appointment-card pending bg-white rounded-lg border border-gray-200 p-4">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <span class="status-badge status-pending">Pendente</span>
+                                                <span class="text-xs text-gray-500">10:30 (45 min)</span>
+                                            </div>
+                                            <h4 class="font-semibold text-azul-uni">Carlos Eduardo</h4>
+                                            <p class="text-sm text-gray-600 mb-1">Acompanhamento mensal</p>
+                                            <div class="flex items-center gap-1 text-sm text-gray-500">
+                                                <i class="fas fa-phone"></i>
+                                                <span>+1 (555) 987-6543</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="p-2 text-azul-uni hover:bg-blue-50 rounded-lg">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Consulta 3 - CANCELADA -->
+                                <div class="appointment-card cancelled bg-white rounded-lg border border-gray-200 p-4">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <span class="status-badge status-cancelled">Cancelado</span>
+                                                <span class="text-xs text-gray-500">11:30 (60 min)</span>
+                                            </div>
+                                            <h4 class="font-semibold text-red-600">Juliana Santos</h4>
+                                            <p class="text-sm text-gray-600 mb-1">Avaliação psicológica</p>
+                                            <div class="flex items-center gap-1 text-sm text-gray-500">
+                                                <i class="fas fa-phone"></i>
+                                                <span>+1 (555) 555-7890</span>
+                                            </div>
+                                            <div class="cancelled-info">
+                                                <i class="fas fa-exclamation-circle mr-2"></i>
+                                                <strong>Motivo:</strong> Paciente remarcou para próxima semana
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="p-2 text-azul-uni hover:bg-blue-50 rounded-lg">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Consulta 4 - CONFIRMADA -->
+                                <div class="appointment-card confirmed bg-white rounded-lg border border-gray-200 p-4">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <span class="status-badge status-confirmed">Confirmado</span>
+                                                <span class="text-xs text-gray-500">14:00 (60 min)</span>
+                                            </div>
+                                            <h4 class="font-semibold text-azul-uni">Ana Paula Rodrigues</h4>
+                                            <p class="text-sm text-gray-600 mb-1">Sessão de terapia</p>
+                                            <div class="flex items-center gap-1 text-sm text-gray-500">
+                                                <i class="fas fa-phone"></i>
+                                                <span>+1 (555) 456-7890</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="p-2 text-azul-uni hover:bg-blue-50 rounded-lg">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Consulta 5 - CONFIRMADA -->
+                                <div class="appointment-card confirmed bg-white rounded-lg border border-gray-200 p-4">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <span class="status-badge status-confirmed">Confirmado</span>
+                                                <span class="text-xs text-gray-500">16:00 (60 min)</span>
+                                            </div>
+                                            <h4 class="font-semibold text-azul-uni">Guilherme Henrique</h4>
+                                            <p class="text-sm text-gray-600 mb-1">Trigésima Consulta</p>
+                                            <div class="flex items-center gap-1 text-sm text-gray-500">
+                                                <i class="fas fa-phone"></i>
+                                                <span>+1 (659) 684-4567</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="p-2 text-azul-uni hover:bg-blue-50 rounded-lg">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Próximos Dias -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mt-6">
+                            <h3 class="font-semibold text-azul-uni mb-4">Próximos Dias</h3>
+                            <div class="space-y-3">
+                                <!-- Amanhã -->
+                                <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                    <div>
+                                        <h4 class="font-medium text-azul-uni" id="tomorrow-date"></h4>
+                                        <p class="text-sm text-gray-600">3 consultas agendadas</p>
+                                    </div>
+                                    <button class="text-azul-uni hover:text-blue-800 font-medium">
+                                        Ver detalhes
+                                    </button>
+                                </div>
+
+                                <!-- Depois de amanhã -->
+                                <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                    <div>
+                                        <h4 class="font-medium text-azul-uni" id="day-after-tomorrow-date"></h4>
+                                        <p class="text-sm text-gray-600">5 consultas agendadas</p>
+                                    </div>
+                                    <button class="text-azul-uni hover:text-blue-800 font-medium">
+                                        Ver detalhes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+
+</html>
