@@ -11,6 +11,7 @@ Cada pasta representa um projeto independente:
 - [menu-lateral](./menu)
 - [projeto-financeiro](./projeto-financeiro)
 - [clinicapsi-prontuarios-telaestagiário](./clinicapsi-prontuarios-telaestagiário)
+- [clinicapsi-atendimentos-estagiario](./clinicapsi-atendimentos-estagiario)
 - (novos projetos serão adicionados aqui)  
 
 ## 🚀 Objetivo do Repositório  
