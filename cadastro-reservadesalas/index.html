@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Reserva de Salas - Cadastro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1857E0;
+            --primary-hover: #1348c0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Header fixo */
+        .header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            height: 64px;
+        }
+
+        /* Espaço para o header fixo */
+        .content-with-header {
+            margin-top: 64px;
+        }
+
+        /* Sidebar mobile */
+        .sidebar-mobile {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 50;
+            background: white;
+            width: 280px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-mobile.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+        }
+
+        .sidebar-overlay.open {
+            display: block;
+        }
+
+        .active-menu {
+            background-color: #f0f7ff;
+            color: var(--primary-color);
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .form-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .form-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-field {
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px 12px;
+            transition: all 0.2s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(24, 87, 224, 0.1);
+        }
+
+        .input-error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e5e7eb;
+        }
+
+        .tab-active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .tab-inactive {
+            background-color: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .sidebar-desktop {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+            
+            /* Mostrar título no mobile */
+            .header-title-mobile {
+                display: block !important;
+            }
+            
+            .header-title-desktop {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .header-title-mobile {
+                display: none;
+            }
+            
+            .header-title-desktop {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header-fixed flex items-center justify-between px-4 bg-white">
+        <div class="flex items-center space-x-4">
+            <button id="mobile-menu-btn" class="mobile-menu-btn text-gray-700">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            <img src="AL - Logo.png" alt="Logotipo" class="h-10 w-auto">
+            
+            <!-- Título para Desktop -->
+            <div class="header-title-desktop">
+                <h1 class="text-xl font-bold text-blue-700">Reserva de Salas</h1>
+                <p class="text-sm text-gray-600">Sistema de Gestão</p>
+            </div>
+            
+            <!-- Título para Mobile -->
+            <div class="header-title-mobile hidden">
+                <h1 class="text-lg font-bold text-blue-700">Reserva de Salas</h1>
+                <p class="text-xs text-gray-600">Sistema de Gestão</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overlay para mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar Mobile -->
+    <nav id="sidebar-mobile" class="sidebar-mobile">
+        <div class="flex justify-between items-center px-4 py-4 border-b border-gray-200">
+            <div class="flex items-center space-x-3">
+                <img src="AL - Logo.png" alt="Logotipo" class="h-8 w-auto">
+                <span class="font-bold text-blue-700">Reserva de Salas</span>
+            </div>
+            <button id="close-sidebar" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <ul class="space-y-1 p-4">
+            <li>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-home w-5 text-center"></i>
+                    <span>Início</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg active-menu">
+                    <i class="fas fa-user-plus w-5 text-center"></i>
+                    <span>Cadastro</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-calendar-alt w-5 text-center"></i>
+                    <span>Reservar Salas</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-eye w-5 text-center"></i>
+                    <span>Exibir Salas</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-chart-bar w-5 text-center"></i>
+                    <span>Relatórios</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-user-cog w-5 text-center"></i>
+                    <span>Perfil</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Botão Sair na Sidebar Mobile -->
+        <div class="absolute bottom-0 w-full p-4 border-t border-gray-200">
+            <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                <i class="fas fa-sign-out-alt w-5 text-center"></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content-with-header flex">
+        <!-- Sidebar Desktop -->
+        <nav class="sidebar-desktop w-64 bg-white h-screen shadow-md fixed pt-4 hidden md:block">
+            <ul class="space-y-2 px-4">
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-home w-5 text-center"></i>
+                        <span>Início</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg active-menu">
+                        <i class="fas fa-user-plus w-5 text-center"></i>
+                        <span>Cadastro</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-calendar-alt w-5 text-center"></i>
+                        <span>Reservar Salas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-eye w-5 text-center"></i>
+                        <span>Exibir Salas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-chart-bar w-5 text-center"></i>
+                        <span>Relatórios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-user-cog w-5 text-center"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Botão Sair na Sidebar Desktop -->
+            <div class="absolute bottom-0 w-full p-4 border-t border-gray-200">
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-sign-out-alt w-5 text-center"></i>
+                    <span>Sair</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content ml-0 md:ml-64 p-4 md:p-8 w-full">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Cadastro</h2>
+                
+                <!-- Tabs para seleção do tipo de cadastro -->
+                <div class="flex mb-8 rounded-lg overflow-hidden shadow-sm">
+                    <button id="tab-sala" class="tab-active flex-1 py-3 font-medium text-center transition-colors">
+                        <i class="fas fa-door-open mr-2"></i>Cadastro de Sala
+                    </button>
+                    <button id="tab-usuario" class="tab-inactive flex-1 py-3 font-medium text-center transition-colors">
+                        <i class="fas fa-user mr-2"></i>Cadastro de Usuário
+                    </button>
+                </div>
+
+                <!-- Formulário de Cadastro de Sala -->
+                <div id="form-sala" class="form-card bg-white p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Informações da Sala</h3>
+                    
+                    <form id="form-cadastro-sala">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Bloco da Sala</label>
+                                <select class="input-field w-full" required>
+                                    <option value="" disabled selected>Selecione o bloco</option>
+                                    <option value="A">Bloco A</option>
+                                    <option value="B">Bloco B</option>
+                                    <option value="C">Bloco C</option>
+                                    <option value="D">Bloco D</option>
+                                    <option value="F">Bloco F</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Andar</label>
+                                <select class="input-field w-full" required>
+                                    <option value="" disabled selected>Selecione o andar</option>
+                                    <option value="terreo">Térreo</option>
+                                    <option value="1">1º Andar</option>
+                                    <option value="2">2º Andar</option>
+                                    <option value="3">3º Andar</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nº da Sala</label>
+                                <input type="number" class="input-field w-full" placeholder="Inserir número da sala" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Capacidade</label>
+                                <input type="number" id="capacidade-sala" class="input-field w-full" placeholder="Inserir quantidade de alunos que a sala comporta" min="1" required>
+                                <div id="erro-capacidade" class="error-message hidden">A capacidade deve ser maior que zero</div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Áudio Visual</label>
+                                <input type="text" class="input-field w-full" placeholder="Ex.: TV 55″, TV 45″, DataShow" required>
+                                <p class="text-xs text-gray-500 mt-1">Digite os equipamentos de áudio visual disponíveis</p>
+                            </div>
+                            
+                            <div class="pt-4 flex justify-end space-x-3">
+                                <button type="button" id="limpar-sala" class="btn-secondary">
+                                    <i class="fas fa-times mr-2"></i>Cancelar
+                                </button>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-check mr-2"></i>Confirmar Cadastro
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Formulário de Cadastro de Usuário -->
+                <div id="form-usuario" class="form-card bg-white p-6 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Informações do Usuário</h3>
+                    
+                    <form id="form-cadastro-usuario">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+                                <input type="text" class="input-field w-full" placeholder="Insira seu nome" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Número de matrícula</label>
+                                <input type="text" id="matricula" class="input-field w-full" placeholder="Ex: 123456" maxlength="6" required>
+                                <div id="erro-matricula" class="error-message hidden">A matrícula deve ter exatamente 6 dígitos</div>
+                                <p class="text-xs text-gray-500 mt-1">6 dígitos (ex: 093941)</p>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">E-mail institucional</label>
+                                <input type="email" id="email" class="input-field w-full" placeholder="Ex: ana093921@unieuro.com.br" required>
+                                <div id="erro-email" class="error-message hidden">O email deve ser do domínio @unieuro.com.br</div>
+                                <p class="text-xs text-gray-500 mt-1">Deve terminar com @unieuro.com.br</p>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+                                <input type="tel" id="telefone" class="input-field w-full" placeholder="(61) 99999-9999" maxlength="15" required>
+                                <div id="erro-telefone" class="error-message hidden">O telefone deve ter pelo menos 10 dígitos</div>
+                                <p class="text-xs text-gray-500 mt-1">Formato: (61) 99999-9999</p>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Data de nascimento</label>
+                                <input type="date" class="input-field w-full" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Sexo</label>
+                                <select class="input-field w-full" required>
+                                    <option value="" disabled selected>Selecione o sexo</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="feminino">Feminino</option>
+                                    <option value="outro">Outro</option>
+                                    <option value="nao_informar">Prefiro não informar</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Cargo</label>
+                                <select class="input-field w-full" required>
+                                    <option value="" disabled selected>Selecione o cargo</option>
+                                    <option value="diretor">Diretor</option>
+                                    <option value="assessor">Assessor Administrativo</option>
+                                    <option value="nti">NTI</option>
+                                    <option value="coordenador">Coordenador</option>
+                                    <option value="secretario">Secretário</option>
+                                    <option value="napi">NAPI</option>
+                                    <option value="manutencao">Manutenção</option>
+                                </select>
+                            </div>
+                            
+                            <div class="pt-4 flex justify-end space-x-3">
+                                <button type="button" id="limpar-usuario" class="btn-secondary">
+                                    <i class="fas fa-times mr-2"></i>Cancelar
+                                </button>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-check mr-2"></i>Confirmar Cadastro
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Menu mobile - corrigido
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebarMobile = document.getElementById('sidebar-mobile');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const closeSidebar = document.getElementById('close-sidebar');
+
+        function openSidebar() {
+            sidebarMobile.classList.add('open');
+            sidebarOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebarMenu() {
+            sidebarMobile.classList.remove('open');
+            sidebarOverlay.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        mobileMenuBtn.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarMenu);
+        sidebarOverlay.addEventListener('click', closeSidebarMenu);
+
+        // Fechar sidebar ao pressionar ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeSidebarMenu();
+            }
+        });
+
+        // Alternar entre os formulários de cadastro
+        document.getElementById('tab-sala').addEventListener('click', function() {
+            document.getElementById('form-sala').classList.remove('hidden');
+            document.getElementById('form-usuario').classList.add('hidden');
+            document.getElementById('tab-sala').classList.remove('tab-inactive');
+            document.getElementById('tab-sala').classList.add('tab-active');
+            document.getElementById('tab-usuario').classList.remove('tab-active');
+            document.getElementById('tab-usuario').classList.add('tab-inactive');
+        });
+
+        document.getElementById('tab-usuario').addEventListener('click', function() {
+            document.getElementById('form-usuario').classList.remove('hidden');
+            document.getElementById('form-sala').classList.add('hidden');
+            document.getElementById('tab-usuario').classList.remove('tab-inactive');
+            document.getElementById('tab-usuario').classList.add('tab-active');
+            document.getElementById('tab-sala').classList.remove('tab-active');
+            document.getElementById('tab-sala').classList.add('tab-inactive');
+        });
+
+        // Validação de capacidade negativa
+        const capacidadeInput = document.getElementById('capacidade-sala');
+        const erroCapacidade = document.getElementById('erro-capacidade');
+
+        capacidadeInput.addEventListener('input', function() {
+            if (this.value < 1) {
+                this.classList.add('input-error');
+                erroCapacidade.classList.remove('hidden');
+            } else {
+                this.classList.remove('input-error');
+                erroCapacidade.classList.add('hidden');
+            }
+        });
+
+        // Validação de matrícula (6 dígitos)
+        const matriculaInput = document.getElementById('matricula');
+        const erroMatricula = document.getElementById('erro-matricula');
+
+        matriculaInput.addEventListener('input', function() {
+            // Remove caracteres não numéricos
+            this.value = this.value.replace(/\D/g, '');
+            
+            if (this.value.length !== 6) {
+                this.classList.add('input-error');
+                erroMatricula.classList.remove('hidden');
+            } else {
+                this.classList.remove('input-error');
+                erroMatricula.classList.add('hidden');
+            }
+        });
+
+        // Validação de email institucional
+        const emailInput = document.getElementById('email');
+        const erroEmail = document.getElementById('erro-email');
+
+        emailInput.addEventListener('input', function() {
+            if (!this.value.endsWith('@unieuro.com.br')) {
+                this.classList.add('input-error');
+                erroEmail.classList.remove('hidden');
+            } else {
+                this.classList.remove('input-error');
+                erroEmail.classList.add('hidden');
+            }
+        });
+
+        // Validação e formatação de telefone
+        const telefoneInput = document.getElementById('telefone');
+        const erroTelefone = document.getElementById('erro-telefone');
+
+        telefoneInput.addEventListener('input', function() {
+            // Remove caracteres não numéricos
+            let value = this.value.replace(/\D/g, '');
+            
+            // Formata o telefone
+            if (value.length > 0) {
+                if (value.length <= 2) {
+                    value = '(' + value;
+                } else if (value.length <= 7) {
+                    value = '(' + value.substring(0, 2) + ') ' + value.substring(2);
+                } else {
+                    value = '(' + value.substring(0, 2) + ') ' + value.substring(2, 7) + '-' + value.substring(7, 11);
+                }
+            }
+            
+            this.value = value;
+            
+            // Validação
+            const digitsOnly = value.replace(/\D/g, '');
+            if (digitsOnly.length < 10) {
+                this.classList.add('input-error');
+                erroTelefone.classList.remove('hidden');
+            } else {
+                this.classList.remove('input-error');
+                erroTelefone.classList.add('hidden');
+            }
+        });
+
+        // Função para limpar formulários
+        function limparFormulario(formId) {
+            const form = document.getElementById(formId);
+            form.reset();
+            // Limpar erros visuais
+            const inputs = form.querySelectorAll('.input-error');
+            inputs.forEach(input => input.classList.remove('input-error'));
+            const erros = form.querySelectorAll('.error-message');
+            erros.forEach(erro => erro.classList.add('hidden'));
+        }
+
+        // Botões de cancelar
+        document.getElementById('limpar-sala').addEventListener('click', function() {
+            limparFormulario('form-cadastro-sala');
+        });
+
+        document.getElementById('limpar-usuario').addEventListener('click', function() {
+            limparFormulario('form-cadastro-usuario');
+        });
+
+        // Prevenir envio dos formulários (para demonstração)
+        document.getElementById('form-cadastro-sala').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validar capacidade antes de enviar
+            if (capacidadeInput.value < 1) {
+                capacidadeInput.classList.add('input-error');
+                erroCapacidade.classList.remove('hidden');
+                capacidadeInput.focus();
+                return;
+            }
+            
+            alert('Cadastro de sala enviado com sucesso!');
+            this.reset();
+        });
+
+        document.getElementById('form-cadastro-usuario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validar matrícula antes de enviar
+            const matriculaDigits = matriculaInput.value.replace(/\D/g, '');
+            if (matriculaDigits.length !== 6) {
+                matriculaInput.classList.add('input-error');
+                erroMatricula.classList.remove('hidden');
+                matriculaInput.focus();
+                return;
+            }
+            
+            // Validar email antes de enviar
+            if (!emailInput.value.endsWith('@unieuro.com.br')) {
+                emailInput.classList.add('input-error');
+                erroEmail.classList.remove('hidden');
+                emailInput.focus();
+                return;
+            }
+            
+            // Validar telefone antes de enviar
+            const telefoneDigits = telefoneInput.value.replace(/\D/g, '');
+            if (telefoneDigits.length < 10) {
+                telefoneInput.classList.add('input-error');
+                erroTelefone.classList.remove('hidden');
+                telefoneInput.focus();
+                return;
+            }
+            
+            alert('Cadastro de usuário enviado com sucesso!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
