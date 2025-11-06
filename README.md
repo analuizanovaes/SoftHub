@@ -13,6 +13,7 @@ Cada pasta representa um projeto independente:
 - [clinicapsi-prontuarios-telaestagiário](./clinicapsi-prontuarios-telaestagiário)
 - [clinicapsi-atendimentos-estagiario](./clinicapsi-atendimentos-estagiario)
 - [cadastro-reservadesalas](./cadastro-reservadesalas)
+- [telaperfil-reservadesala](./telaperfil-reservadesala)
 - (novos projetos serão adicionados aqui)  
 
 ## 🚀 Objetivo do Repositório  
