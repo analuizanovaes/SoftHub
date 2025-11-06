@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Clínica Psicológica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --azul-uni: #004A8F;
+            --dourado-uni: #d4af37;
+            --cinza-claro: #f8fafc;
+        }
+        
+        .bg-cinza-claro {
+            background-color: var(--cinza-claro);
+        }
+        
+        .text-azul-uni {
+            color: var(--azul-uni);
+        }
+        
+        .text-dourado-uni {
+            color: var(--dourado-uni);
+        }
+        
+        .border-azul-uni {
+            border-color: var(--azul-uni);
+        }
+        
+        .header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 40;
+        }
+        
+        .content-with-header {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+        }
+        
+        .sidebar-mobile {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .sidebar-mobile.active {
+            transform: translateX(0);
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 45;
+            display: none;
+        }
+        
+        .sidebar-overlay.active {
+            display: block;
+        }
+        
+        @media (min-width: 768px) {
+            .sidebar-mobile {
+                transform: translateX(0);
+            }
+        }
+        
+        .btn-sair {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background-color: #dc2626;
+            color: white;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .btn-sair:hover {
+            background-color: #b91c1c;
+        }
+        
+        .btn-primary {
+            background-color: var(--azul-uni);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1e3a8a;
+        }
+        
+        .btn-secondary {
+            background-color: #f3f4f6;
+            color: #4b5563;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e5e7eb;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            transition: border-color 0.2s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--azul-uni);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+        
+        .section-divider {
+            border-top: 1px solid #e5e7eb;
+            margin: 24px 0;
+        }
+    </style>
+</head>
+<body class="bg-cinza-claro">
+    <!-- Header Centralizado -->
+    <header class="header-fixed">
+        <div class="flex items-center justify-between px-4 md:px-6 h-full">
+            <!-- Logo e botão menu mobile -->
+            <div class="flex items-center gap-3">
+                <!-- Botão menu mobile -->
+                <button id="menu-button" class="md:hidden text-azul-uni p-2">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+                <!-- IMAGEM DO LOGO -->
+                <img src="imagens/logo.png" alt="Logo UNIEURO" class="h-12 md:h-14 w-auto">
+            </div>
+
+            <!-- Título centralizado -->
+            <div class="absolute left-1/2 transform -translate-x-1/2">
+                <h1 class="text-lg font-bold text-azul-uni">Clínica Psicológica</h1>
+            </div>
+
+            <!-- Botão sair à direita -->
+            <div class="flex items-center gap-4">
+                <!-- Botão Sair -->
+                <button class="btn-sair" onclick="sair()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overlay para mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <div class="flex content-with-header">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="sidebar-mobile w-64 md:w-64 bg-white border-r border-gray-200 min-h-screen fixed md:relative z-50 md:z-auto">
+            <div class="p-4 md:p-6">
+                <!-- Botão fechar mobile -->
+                <div class="flex justify-between items-center md:hidden pb-4">
+                    <h2 class="font-semibold text-azul-uni">Menu</h2>
+                    <button id="close-menu" class="text-azul-uni p-2">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Informações do Usuário -->
+                <div class="flex items-center gap-3 pb-6 border-b border-gray-100">
+                    <!-- IMAGEM DO USUÁRIO -->
+                    <img src="imagens/imagemEstagiário.png" alt="Lucas Carvalho"
+                        class="w-16 h-16 md:w-12 md:h-12 rounded-full object-cover border-2 border-azul-uni">
+                    <div>
+                        <h3 class="font-semibold text-azul-uni">Lucas Carvalho</h3>
+                        <p class="text-sm text-dourado-uni font-medium">Estagiário</p>
+                    </div>
+                </div>
+
+                <!-- Menu de Navegação -->
+                <nav class="mt-6">
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-home w-5"></i>
+                                <span>Início</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-file-medical w-5"></i>
+                                <span>Prontuários</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-users w-5"></i>
+                                <span>Seleção de Inscritos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-door-open w-5"></i>
+                                <span>Visualização de Salas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-calendar-check w-5"></i>
+                                <span>Consultas Agendadas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-chart-bar w-5"></i>
+                                <span>Gerar Relatório</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 bg-blue-50 text-azul-uni font-semibold rounded-lg">
+                                <i class="fas fa-user w-5"></i>
+                                <span>Perfil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="flex-1 p-6 md:p-8">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-lg shadow-sm p-6 md:p-8">
+                    <!-- Cabeçalho da Página -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-azul-uni">Perfil</h2>
+                        <p class="text-gray-600 mt-2">Gerencie sua conta e configurações de privacidade</p>
+                    </div>
+
+                    <!-- Seção Nome -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Nome</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+                                <input type="text" class="input-field" placeholder="Estagiário">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" class="input-field" placeholder="Ex: estagiáriopsico@gmail.com">
+                                <p class="text-sm text-gray-500 mt-2">
+                                    O email é usado para fazer login e enviar notificações importantes. Para mudar seu endereço de email, atualize-o aqui e teremos enviar um código de verificação. Insira o código para confirmar seu novo endereço de email.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Seção Senha -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Atualize sua senha</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Senha antiga</label>
+                                <input type="password" class="input-field">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nova Senha</label>
+                                <input type="password" class="input-field">
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">
+                            Para mudar sua senha, insira sua senha atual e depois crie uma nova. Pediremos que você faça login novamente com sua nova senha.
+                        </p>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Seção Telefone -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Telefone</h3>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Número de Telefone</label>
+                            <input type="tel" class="input-field" placeholder="(61) 99261-1848" maxlength="15" oninput="formatarTelefone(this)">
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">
+                            Informe seu número de telefone.
+                        </p>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="flex justify-end gap-4 pt-4">
+                        <button class="btn-secondary">Cancelar</button>
+                        <button class="btn-primary">Salvar alterações</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Funções para controle do menu mobile
+        document.getElementById('menu-button').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('sidebar-overlay').classList.add('active');
+        });
+
+        document.getElementById('close-menu').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebar-overlay').classList.remove('active');
+        });
+
+        document.getElementById('sidebar-overlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebar-overlay').classList.remove('active');
+        });
+
+        // Função para sair (exemplo)
+        function sair() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                // Redirecionar para a página de login ou fazer logout
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Função para formatar telefone - aceita celular (11 dígitos) e fixo (10 dígitos)
+        function formatarTelefone(input) {
+            // Remove tudo que não é dígito
+            let valor = input.value.replace(/\D/g, '');
+            
+            // Limita a 11 dígitos (máximo para celular)
+            if (valor.length > 11) {
+                valor = valor.substring(0, 11);
+            }
+            
+            // Aplica a formatação
+            let valorFormatado = '';
+            
+            if (valor.length > 0) {
+                valorFormatado = '(' + valor.substring(0, 2);
+                
+                if (valor.length === 11) {
+                    // Celular: (XX) XXXXX-XXXX
+                    if (valor.length > 2) {
+                        valorFormatado += ') ' + valor.substring(2, 7);
+                    }
+                    if (valor.length > 7) {
+                        valorFormatado += '-' + valor.substring(7, 11);
+                    }
+                } else {
+                    // Fixo: (XX) XXXX-XXXX
+                    if (valor.length > 2) {
+                        valorFormatado += ') ' + valor.substring(2, 6);
+                    }
+                    if (valor.length > 6) {
+                        valorFormatado += '-' + valor.substring(6, 10);
+                    }
+                }
+            }
+            
+            input.value = valorFormatado;
+        }
+    </script>
+</body>
+</html>
