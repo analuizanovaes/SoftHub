@@ -65,14 +65,19 @@
     <div class="flex content-with-header">
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="sidebar-mobile w-64 md:w-64 bg-white border-r border-gray-200 min-h-screen fixed md:relative z-50 md:z-auto">
-            <div class="p-4 md:p-6">
+            class="sidebar-mobile w-64 md:w-64 bg-white border-r border-gray-200 min-h-screen fixed md:relative z-50 md:z-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+            <div class="p-4 md:p-6 h-full flex flex-col">
                 <!-- Botão fechar mobile -->
                 <div class="flex justify-between items-center md:hidden pb-4">
                     <h2 class="font-semibold text-azul-uni">Menu</h2>
                     <button id="close-menu" class="text-azul-uni p-2">
                         <i class="fas fa-times text-lg"></i>
                     </button>
+                </div>
+
+                <!-- Título da Clínica na Sidebar - MOBILE -->
+                <div class="md:hidden mb-4 pb-4 border-b border-gray-200">
+                    <h1 class="text-xl font-bold text-azul-uni text-center">Clínica Psicológica</h1>
                 </div>
 
                 <!-- Informações do Usuário -->
@@ -87,7 +92,7 @@
                 </div>
 
                 <!-- Menu de Navegação -->
-                <nav class="mt-6">
+                <nav class="mt-6 flex-1">
                     <ul class="space-y-2">
                         <li>
                             <a href="#"
@@ -152,6 +157,7 @@
                     <p class="text-gray-600">Gerencie seus compromissos diários e consultas de pacientes</p>
                 </div>
 
+                <!-- Resto do conteúdo permanece igual -->
                 <!-- Data Atual -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
                     <h3 id="current-date" class="text-lg font-semibold text-azul-uni mb-2"></h3>
