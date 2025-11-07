@@ -8,11 +8,12 @@ O objetivo é centralizar as práticas e aprendizados adquiridos ao longo da exp
 Cada pasta representa um projeto independente:  
 
 - [tela-login](./tela-login)  
-- [menu-lateral](./menu)
+- [side-bar-teste-reservadesalas](./side-bar-teste-reservadesalas)
 - [projeto-financeiro](./projeto-financeiro)
 - [clinicapsi-prontuarios-telaestagiário](./clinicapsi-prontuarios-telaestagiário)
 - [clinicapsi-atendimentos-estagiario](./clinicapsi-atendimentos-estagiario)
 - [cadastro-reservadesalas](./cadastro-reservadesalas)
+- [telaperfil-clinicapsicologia](./telaperfil-clinicapsicologia)
 - (novos projetos serão adicionados aqui)  
 
 ## 🚀 Objetivo do Repositório  
