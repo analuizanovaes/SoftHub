@@ -30,7 +30,7 @@
 </head>
 
 <body class="bg-cinza-claro">
-    <!-- Header Centralizado -->
+    <!-- Header Centralizado - MANTIDO ORIGINAL -->
     <header class="header-fixed">
         <div class="flex items-center justify-between px-4 md:px-6 h-full">
             <!-- Logo e botão menu mobile -->
@@ -43,20 +43,19 @@
                 <img src="imagens/logo (2).png" alt="Logo UNIEURO" class="h-12 md:h-14 w-auto">
             </div>
 
-            <!-- Título centralizado -->
-            <div class="absolute left-1/2 transform -translate-x-1/2">
+            <!-- Título centralizado desktop -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
                 <h1 class="text-lg font-bold text-azul-uni">Clínica Psicológica</h1>
             </div>
 
-            <!-- Botão Sair no lugar da barra de pesquisa -->
+            <!-- Botão Sair -->
             <div class="flex items-center gap-4">
                 <button id="logout-button"
-                    class="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                    class="flex items-center gap-2 px-4 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span class="hidden md:inline">Sair</span>
+                    <span>Sair</span>
                 </button>
             </div>
-        </div>
     </header>
 
     <!-- Overlay para mobile -->
@@ -65,8 +64,8 @@
     <div class="flex content-with-header">
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="sidebar-mobile w-64 md:w-64 bg-white border-r border-gray-200 min-h-screen fixed md:relative z-50 md:z-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300">
-            <div class="p-4 md:p-6 h-full flex flex-col">
+            class="sidebar-mobile w-64 bg-white border-r border-gray-200 min-h-screen fixed md:relative z-50 md:z-auto">
+            <div class="p-4 md:p-6">
                 <!-- Botão fechar mobile -->
                 <div class="flex justify-between items-center md:hidden pb-4">
                     <h2 class="font-semibold text-azul-uni">Menu</h2>
@@ -75,16 +74,16 @@
                     </button>
                 </div>
 
-                <!-- Título da Clínica na Sidebar - MOBILE -->
-                <div class="md:hidden mb-4 pb-4 border-b border-gray-200">
+                <!-- Título da Clínica na Sidebar -->
+                <div class="pb-6 border-b border-gray-100 md:hidden">
                     <h1 class="text-xl font-bold text-azul-uni text-center">Clínica Psicológica</h1>
                 </div>
 
                 <!-- Informações do Usuário -->
-                <div class="flex items-center gap-3 pb-6 border-b border-gray-100">
+                <div class="flex items-center gap-3 pb-6 border-b border-gray-100 mt-4 md:mt-0">
                     <!-- IMAGEM DO USUÁRIO -->
                     <img src="imagens/imagemEstagiário.png" alt="Lucas Carvalho"
-                        class="w-16 h-16 md:w-12 md:h-12 rounded-full object-cover border-2 border-azul-uni">
+                        class="w-13 h-14 md:w-12 md:h-12 rounded-full object-cover border-2 border-azul-uni">
                     <div>
                         <h3 class="font-semibold text-azul-uni">Lucas Carvalho</h3>
                         <p class="text-sm text-dourado-uni font-medium">Estagiário</p>
@@ -92,7 +91,7 @@
                 </div>
 
                 <!-- Menu de Navegação -->
-                <nav class="mt-6 flex-1">
+                <nav class="mt-6">
                     <ul class="space-y-2">
                         <li>
                             <a href="#"
@@ -124,7 +123,7 @@
                         </li>
                         <li>
                             <a href="#"
-                                class="flex items-center gap-3 px-3 py-2 bg-blue-50 text-azul-uni font-semibold rounded-lg">
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
                                 <i class="fas fa-calendar-check w-5"></i>
                                 <span>Consultas Agendadas</span>
                             </a>
@@ -138,7 +137,7 @@
                         </li>
                         <li>
                             <a href="#"
-                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                class="flex items-center gap-3 px-3 py-2 bg-blue-50 text-azul-uni font-semibold rounded-lg">
                                 <i class="fas fa-user w-5"></i>
                                 <span>Perfil</span>
                             </a>
@@ -148,7 +147,7 @@
             </div>
         </aside>
 
-        <!-- Conteúdo Principal -->
+        <!-- Conteúdo Principal - MANTIDO ORIGINAL (SEU CÓDIGO COMPLETO) -->
         <main class="flex-1 p-4 md:p-6">
             <div class="max-w-7xl mx-auto">
                 <!-- Cabeçalho da Página -->
@@ -157,7 +156,6 @@
                     <p class="text-gray-600">Gerencie seus compromissos diários e consultas de pacientes</p>
                 </div>
 
-                <!-- Resto do conteúdo permanece igual -->
                 <!-- Data Atual -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
                     <h3 id="current-date" class="text-lg font-semibold text-azul-uni mb-2"></h3>
@@ -423,6 +421,32 @@
             </div>
         </main>
     </div>
+
+    <script>
+        // Funções para controle do menu mobile
+        document.getElementById('menu-button').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('sidebar-overlay').classList.add('active');
+        });
+
+        document.getElementById('close-menu').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebar-overlay').classList.remove('active');
+        });
+
+        document.getElementById('sidebar-overlay').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebar-overlay').classList.remove('active');
+        });
+
+        // Fechar menu ao redimensionar para desktop (opcional)
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 768) {
+                document.getElementById('sidebar').classList.remove('active');
+                document.getElementById('sidebar-overlay').classList.remove('active');
+            }
+        });
+    </script>
     <script src="script.js" defer></script>
 </body>
 

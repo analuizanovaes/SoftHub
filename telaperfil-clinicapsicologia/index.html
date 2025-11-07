@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,23 +13,23 @@
             --dourado-uni: #d4af37;
             --cinza-claro: #f8fafc;
         }
-        
+
         .bg-cinza-claro {
             background-color: var(--cinza-claro);
         }
-        
+
         .text-azul-uni {
             color: var(--azul-uni);
         }
-        
+
         .text-dourado-uni {
             color: var(--dourado-uni);
         }
-        
+
         .border-azul-uni {
             border-color: var(--azul-uni);
         }
-        
+
         .header-fixed {
             position: fixed;
             top: 0;
@@ -39,21 +40,21 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 40;
         }
-        
+
         .content-with-header {
             margin-top: 70px;
             min-height: calc(100vh - 70px);
         }
-        
+
         .sidebar-mobile {
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
         }
-        
+
         .sidebar-mobile.active {
             transform: translateX(0);
         }
-        
+
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -64,17 +65,18 @@
             z-index: 45;
             display: none;
         }
-        
+
         .sidebar-overlay.active {
             display: block;
         }
-        
+
         @media (min-width: 768px) {
             .sidebar-mobile {
                 transform: translateX(0);
             }
+
         }
-        
+
         .btn-sair {
             display: flex;
             align-items: center;
@@ -86,11 +88,11 @@
             font-weight: 500;
             transition: all 0.2s;
         }
-        
+
         .btn-sair:hover {
             background-color: #b91c1c;
         }
-        
+
         .btn-primary {
             background-color: var(--azul-uni);
             color: white;
@@ -99,11 +101,11 @@
             font-weight: 500;
             transition: background-color 0.2s;
         }
-        
+
         .btn-primary:hover {
             background-color: #1e3a8a;
         }
-        
+
         .btn-secondary {
             background-color: #f3f4f6;
             color: #4b5563;
@@ -112,11 +114,11 @@
             font-weight: 500;
             transition: background-color 0.2s;
         }
-        
+
         .btn-secondary:hover {
             background-color: #e5e7eb;
         }
-        
+
         .input-field {
             width: 100%;
             padding: 10px 12px;
@@ -124,24 +126,26 @@
             border-radius: 6px;
             transition: border-color 0.2s;
         }
-        
+
         .input-field:focus {
             outline: none;
             border-color: var(--azul-uni);
             box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
         }
-        
+
         .section-divider {
             border-top: 1px solid #e5e7eb;
             margin: 24px 0;
         }
-        
+
         .input-somente-texto {
             text-transform: capitalize;
         }
     </style>
 </head>
+
 <body class="bg-cinza-claro">
+    <!-- Header Centralizado -->
     <!-- Header Centralizado -->
     <header class="header-fixed">
         <div class="flex items-center justify-between px-4 md:px-6 h-full">
@@ -152,7 +156,12 @@
                     <i class="fas fa-bars text-lg"></i>
                 </button>
                 <!-- IMAGEM DO LOGO -->
-                <img src="imagens/logo (2).png" alt="Logo UNIEURO" class="h-12 md:h-13 w-auto">
+                <img src="imagens/logo (2).png" alt="Logo UNIEURO" class="h-12 md:h-14 w-auto">
+            </div>
+
+            <!-- Título centralizado - APENAS DESKTOP -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
+                <h1 class="text-lg font-bold text-azul-uni">Clínica Psicológica</h1>
             </div>
 
             <!-- Botão sair à direita -->
@@ -171,6 +180,7 @@
 
     <div class="flex content-with-header">
         <!-- Sidebar -->
+        <!-- Sidebar -->
         <aside id="sidebar"
             class="sidebar-mobile w-64 md:w-64 bg-white border-r border-gray-200 min-h-screen fixed md:relative z-50 md:z-auto">
             <div class="p-4 md:p-6">
@@ -182,7 +192,7 @@
                     </button>
                 </div>
 
-                <!-- Título da Clínica na Sidebar -->
+                <!-- Título da Clínica na Sidebar - APENAS MOBILE -->
                 <div class="pb-6 border-b border-gray-100 md:hidden">
                     <h1 class="text-xl font-bold text-azul-uni text-center">Clínica Psicológica</h1>
                 </div>
@@ -191,14 +201,14 @@
                 <div class="flex items-center gap-3 pb-6 border-b border-gray-100 mt-4 md:mt-0">
                     <!-- IMAGEM DO USUÁRIO -->
                     <img src="imagens/imagemEstagiário.png" alt="Lucas Carvalho"
-                        class="w-12 h-14 md:w-12 md:h-12 rounded-full object-cover border-2 border-azul-uni">
+                        class="w-16 h-16 md:w-12 md:h-12 rounded-full object-cover border-2 border-azul-uni">
                     <div>
                         <h3 class="font-semibold text-azul-uni">Lucas Carvalho</h3>
                         <p class="text-sm text-dourado-uni font-medium">Estagiário</p>
                     </div>
                 </div>
 
-                <!-- Menu de Navegação -->
+                <!-- Menu de Navegação (mantido igual) -->
                 <nav class="mt-6">
                     <ul class="space-y-2">
                         <li>
@@ -210,7 +220,7 @@
                         </li>
                         <li>
                             <a href="#"
-                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                class="flex items-center gap-3 px-3 py-2 bg-blue-50 text-azul-uni font-semibold rounded-lg">
                                 <i class="fas fa-file-medical w-5"></i>
                                 <span>Prontuários</span>
                             </a>
@@ -245,7 +255,7 @@
                         </li>
                         <li>
                             <a href="#"
-                                class="flex items-center gap-3 px-3 py-2 bg-blue-50 text-azul-uni font-semibold rounded-lg">
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
                                 <i class="fas fa-user w-5"></i>
                                 <span>Perfil</span>
                             </a>
@@ -271,13 +281,16 @@
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
-                                <input type="text" class="input-field input-somente-texto" placeholder="Estagiário" oninput="validarSomenteTexto(this)">
+                                <input type="text" class="input-field input-somente-texto" placeholder="Estagiário"
+                                    oninput="validarSomenteTexto(this)">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                                 <input type="email" class="input-field" placeholder="Ex: estagiáriopsico@gmail.com">
                                 <p class="text-sm text-gray-500 mt-2">
-                                    O email é usado para fazer login e enviar notificações importantes. Para mudar seu endereço de email, atualize-o aqui e teremos enviar um código de verificação. Insira o código para confirmar seu novo endereço de email.
+                                    O email é usado para fazer login e enviar notificações importantes. Para mudar seu
+                                    endereço de email, atualize-o aqui e teremos enviar um código de verificação. Insira
+                                    o código para confirmar seu novo endereço de email.
                                 </p>
                             </div>
                         </div>
@@ -299,7 +312,8 @@
                             </div>
                         </div>
                         <p class="text-sm text-gray-500 mt-2">
-                            Para mudar sua senha, insira sua senha atual e depois crie uma nova. Pediremos que você faça login novamente com sua nova senha.
+                            Para mudar sua senha, insira sua senha atual e depois crie uma nova. Pediremos que você faça
+                            login novamente com sua nova senha.
                         </p>
                     </div>
 
@@ -310,7 +324,8 @@
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Telefone</h3>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Número de Telefone</label>
-                            <input type="tel" class="input-field" placeholder="(61) 99261-1848" maxlength="15" oninput="formatarTelefone(this)">
+                            <input type="tel" class="input-field" placeholder="(61) 99261-1848" maxlength="15"
+                                oninput="formatarTelefone(this)">
                         </div>
                         <p class="text-sm text-gray-500 mt-2">
                             Informe seu número de telefone.
@@ -329,17 +344,17 @@
 
     <script>
         // Funções para controle do menu mobile
-        document.getElementById('menu-button').addEventListener('click', function() {
+        document.getElementById('menu-button').addEventListener('click', function () {
             document.getElementById('sidebar').classList.add('active');
             document.getElementById('sidebar-overlay').classList.add('active');
         });
 
-        document.getElementById('close-menu').addEventListener('click', function() {
+        document.getElementById('close-menu').addEventListener('click', function () {
             document.getElementById('sidebar').classList.remove('active');
             document.getElementById('sidebar-overlay').classList.remove('active');
         });
 
-        document.getElementById('sidebar-overlay').addEventListener('click', function() {
+        document.getElementById('sidebar-overlay').addEventListener('click', function () {
             document.getElementById('sidebar').classList.remove('active');
             document.getElementById('sidebar-overlay').classList.remove('active');
         });
@@ -356,18 +371,18 @@
         function formatarTelefone(input) {
             // Remove tudo que não é dígito
             let valor = input.value.replace(/\D/g, '');
-            
+
             // Limita a 11 dígitos (máximo para celular)
             if (valor.length > 11) {
                 valor = valor.substring(0, 11);
             }
-            
+
             // Aplica a formatação
             let valorFormatado = '';
-            
+
             if (valor.length > 0) {
                 valorFormatado = '(' + valor.substring(0, 2);
-                
+
                 if (valor.length === 11) {
                     // Celular: (XX) XXXXX-XXXX
                     if (valor.length > 2) {
@@ -386,7 +401,7 @@
                     }
                 }
             }
-            
+
             input.value = valorFormatado;
         }
 
@@ -394,12 +409,13 @@
         function validarSomenteTexto(input) {
             // Remove números e caracteres especiais, mantém apenas letras, espaços, acentos e hífen
             input.value = input.value.replace(/[^a-zA-ZÀ-ÿ\s\-']/g, '');
-            
+
             // Capitaliza a primeira letra de cada palavra
-            input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
+            input.value = input.value.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
                 return a.toUpperCase();
             });
         }
     </script>
 </body>
+
 </html>
