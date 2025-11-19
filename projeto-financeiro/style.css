@@ -38,3 +38,10 @@
         color: white;
     }
 }
+
+/* Ícones SVG */
+.icon {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}

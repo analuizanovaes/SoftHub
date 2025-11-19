@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário - Clínica de Psicologia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cinza-claro': '#f8fafc',
+                        'azul-uni': '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-cinza-claro">
+    <!-- Header Centralizado -->
+    <header class="header-fixed">
+        <div class="flex items-center justify-between px-4 md:px-6 h-full">
+            <!-- Logo e botão menu mobile -->
+            <div class="flex items-center gap-3">
+                <!-- Botão menu mobile -->
+                <button id="menu-button" class="md:hidden text-azul-uni p-2">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+                <!-- IMAGEM DO LOGO -->
+                <img src="logoUnieuro.png" alt="Logo Unieuro" class="h-49 md:h-14 w-211">
+            </div>
+
+            <!-- Texto "Clínica Psicológica" à direita -->
+            <div class="flex items-center gap-4">
+                <strong><span class="text-azul-uni hidden md:block">Clínica Psicológica</span></strong>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <div class="pt-24 pb-8 px-4">
+        <div class="bg-white rounded-lg card w-full max-w-3xl mx-auto">
+            <!-- Cabeçalho do Formulário -->
+            <div class="p-6 border-b border-gray-200">
+                <h1 class="text-2xl font-bold text-gray-800 text-center">Cadastro de Usuário</h1>
+                <p class="text-gray-600 text-center mt-2">Selecione um perfil para o Usuário:</p>
+            </div>
+
+            <!-- Seleção de Perfil -->
+            <div class="p-6">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+                    <button
+                        class="profile-option active bg-[#004A8F] text-white py-3 px-2 rounded-md flex items-center justify-center"
+                        data-profile="estagiario">
+                        <i class="fas fa-user-graduate mr-2"></i>
+                        <strong><span class=" text-sm">Estagiário</span></strong>
+                    </button>
+                    <button
+                        class="profile-option bg-white text-gray-700 py-3 px-2 rounded-md border border-gray-300 flex items-center justify-center"
+                        data-profile="supervisor">
+                        <i class="fas fa-user-tie mr-2"></i>
+                        <strong><span class="text-sm">Supervisor</span></strong>
+                    </button>
+                    <button
+                        class="profile-option bg-white text-gray-700 py-3 px-2 rounded-md border border-gray-300 flex items-center justify-center"
+                        data-profile="coordenador">
+                        <i class="fas fa-user-cog mr-2"></i>
+                        <strong><span class="text-sm">Coordenador</span></strong>
+                    </button>
+                    <button
+                        class="profile-option bg-white text-gray-700 py-3 px-2 rounded-md border border-gray-300 flex items-center justify-center"
+                        data-profile="responsavel">
+                        <i class="fas fa-user-md mr-2"></i>
+                        <strong><span class="text-sm">Resp.Técnico</span></strong>
+                    </button>
+                    <button
+                        class="profile-option bg-white text-gray-700 py-3 px-2 rounded-md border border-gray-300 flex items-center justify-center"
+                        data-profile="secretaria">
+                        <i class="fas fa-user-secret mr-2"></i>
+                        <strong><span class="text-sm">Secretária</span></strong>
+                    </button>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Formulário Estagiário -->
+                <div id="estagiario-form" class="form-section">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-user-graduate text-[#004A8F] mr-2"></i>Estagiário
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="field-group">
+                            <label class="field-label">Nome Completo <span class="required-asterisk">*</span></label>
+                            <input type="text" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 nome-completo"
+                                placeholder="Digite o nome aqui">
+                            <div class="error-message nome-error">Nome deve conter apenas letras e espaços</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">E-mail Institucional <span class="required-asterisk">*</span></label>
+                            <input type="email" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 email-input"
+                                placeholder="exemplo@unieuro.com.br">
+                            <div class="error-message email-error">Email deve terminar com @unieuro.com.br</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">CRP do Supervisor <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o CRP aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 senha-input"
+                                placeholder="Digite uma senha provisória aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Confirmação de Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 confirmacao-senha"
+                                placeholder="Confirme a senha aqui">
+                            <div class="error-message confirmacao-senha-error">As senhas não coincidem</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Nível do Estagiário <span class="required-asterisk">*</span></label>
+                            <select required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                <option value="">Selecione o nível aqui</option>
+                                <option>Nível 1</option>
+                                <option>Nível 2</option>
+                                <option>Nível 3</option>
+                            </select>
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="field-group">
+                            <label class="field-label">RA <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o RA do Aluno aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="field-group">
+                            <label class="field-label">Semestre do Aluno <span class="required-asterisk">*</span></label>
+                            <select required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500">
+                                <option value="">Selecione o semestre aqui</option>
+                                <option>1º Semestre</option>
+                                <option>2º Semestre</option>
+                                <option>3º Semestre</option>
+                                <option>4º Semestre</option>
+                                <option>5º Semestre</option>
+                                <option>6º Semestre</option>
+                                <option>7º Semestre</option>
+                                <option>8º Semestre</option>
+                            </select>
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário Supervisor -->
+                <div id="supervisor-form" class="form-section hidden">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-user-tie text-[#004A8F] mr-2"></i>Supervisor
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="field-group">
+                            <label class="field-label">Nome Completo <span class="required-asterisk">*</span></label>
+                            <input type="text" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 nome-completo"
+                                placeholder="Digite o nome aqui">
+                            <div class="error-message nome-error">Nome deve conter apenas letras e espaços</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">E-mail Institucional <span class="required-asterisk">*</span></label>
+                            <input type="email" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 email-input"
+                                placeholder="exemplo@unieuro.com.br">
+                            <div class="error-message email-error">Email deve terminar com @unieuro.com.br</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">CRP <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o CRP aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 senha-input"
+                                placeholder="Digite uma senha provisória aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Confirmação de Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 confirmacao-senha"
+                                placeholder="Confirme a senha aqui">
+                            <div class="error-message confirmacao-senha-error">As senhas não coincidem</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">CPF <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o CPF aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário Coordenador -->
+                <div id="coordenador-form" class="form-section hidden">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-user-cog text-[#004A8F] mr-2"></i>Coordenador
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="field-group">
+                            <label class="field-label">Nome Completo <span class="required-asterisk">*</span></label>
+                            <input type="text" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 nome-completo"
+                                placeholder="Digite o nome aqui">
+                            <div class="error-message nome-error">Nome deve conter apenas letras e espaços</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">E-mail Institucional <span class="required-asterisk">*</span></label>
+                            <input type="email" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 email-input"
+                                placeholder="exemplo@unieuro.com.br">
+                            <div class="error-message email-error">Email deve terminar com @unieuro.com.br</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">CRP <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o CRP aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">CPF <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o CPF aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 senha-input"
+                                placeholder="Digite uma senha provisória aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Confirmação de Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 confirmacao-senha"
+                                placeholder="Confirme a senha aqui">
+                            <div class="error-message confirmacao-senha-error">As senhas não coincidem</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário Responsável Técnico -->
+                <div id="responsavel-form" class="form-section hidden">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-user-md text-[#004A8F] mr-2"></i>Resp. Técnico
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="field-group">
+                            <label class="field-label">Nome Completo <span class="required-asterisk">*</span></label>
+                            <input type="text" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 nome-completo"
+                                placeholder="Digite o nome aqui">
+                            <div class="error-message nome-error">Nome deve conter apenas letras e espaços</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">E-mail Institucional <span class="required-asterisk">*</span></label>
+                            <input type="email" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 email-input"
+                                placeholder="exemplo@unieuro.com.br">
+                            <div class="error-message email-error">Email deve terminar com @unieuro.com.br</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">CRP <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o CRP aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 senha-input"
+                                placeholder="Digite uma senha provisória aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Confirmação de Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 confirmacao-senha"
+                                placeholder="Confirme a senha aqui">
+                            <div class="error-message confirmacao-senha-error">As senhas não coincidem</div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="field-group">
+                            <label class="field-label">CPF <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o CPF aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário Secretária -->
+                <div id="secretaria-form" class="form-section hidden">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-user-secret text-[#004A8F] mr-2"></i>Secretária
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="field-group">
+                            <label class="field-label">Nome Completo <span class="required-asterisk">*</span></label>
+                            <input type="text" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 nome-completo"
+                                placeholder="Digite o nome aqui">
+                            <div class="error-message nome-error">Nome deve conter apenas letras e espaços</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">E-mail Institucional <span class="required-asterisk">*</span></label>
+                            <input type="email" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 email-input"
+                                placeholder="exemplo@unieuro.com.br">
+                            <div class="error-message email-error">Email deve terminar com @unieuro.com.br</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Código Funcionário <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o Código aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">CPF <span class="required-asterisk">*</span></label>
+                            <input type="number" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                                placeholder="Digite o CPF aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 senha-input"
+                                placeholder="Digite uma senha provisória aqui">
+                            <div class="error-message">Campo obrigatório</div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Confirmação de Senha <span class="required-asterisk">*</span></label>
+                            <input type="password" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 confirmacao-senha"
+                                placeholder="Confirme a senha aqui">
+                            <div class="error-message confirmacao-senha-error">As senhas não coincidem</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botão de Cadastro -->
+                <div class="mt-8 flex justify-center">
+                    <button
+                        class="bg-[#004A8F] hover:bg-[#003366] text-white font-medium py-2 px-8 rounded-md transition-colors flex items-center gap-2"
+                        id="btn-cadastrar">
+                        <i class="fas fa-user-plus"></i>
+                        Cadastrar Usuário
+                    </button>
+                </div>
+            </div>
+
+            <!-- Rodapé -->
+            <div class="p-4 border-t border-gray-200 text-center text-gray-500 text-sm">
+                <p>© 2023 Clínica de Psicologia. Todos os direitos reservados.</p>
+            </div>
+        </div>
+
+        <script src="script.js" defer></script>
+
+</body>
+
+</html>

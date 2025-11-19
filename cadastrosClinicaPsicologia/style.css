@@ -1,0 +1,70 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.profile-option {
+    transition: all 0.2s ease;
+}
+
+.profile-option.active {
+    background-color: #004A8F;
+    color: white;
+    font-weight: 600;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+    transition: all 0.3s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+.divider {
+    border-top: 1px solid #e2e8f0;
+    margin: 1.5rem 0;
+}
+
+.field-group {
+    margin-bottom: 1.5rem;
+}
+
+.field-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #374151;
+}
+
+.card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.input-error {
+    border-color: #dc2626;
+    background-color: #fef2f2;
+}
+
+.required-asterisk {
+    color: #dc2626;
+}
