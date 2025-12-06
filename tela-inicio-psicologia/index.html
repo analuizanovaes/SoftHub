@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Estagiário de Psicologia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuração do Tailwind com cores personalizadas -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'azul-uni': '#004A8F', // Azul Unieuro
+                        'dourado-uni': '#BC910A', // Dourado Unieuro
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="bg-gray-50">
+    <header class="header-fixed flex items-center justify-between px-4 md:px-6">
+        <div class="flex items-center gap-3">
+            <button id="menu-button" class="md:hidden text-azul-uni p-2">
+                <i class="fas fa-bars text-lg"></i>
+            </button>
+            <div class="h-12 w-auto flex items-center justify-center px-0">
+                <!-- Fallback para imagem caso não carregue -->
+                <img src="imagens/logounieuro.png" alt="Logo UNIEURO" class="h-full object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-azul-uni font-bold text-xl\'>UNIEURO</span>'">
+            </div>
+        </div>
+
+        <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
+            <h1 class="text-lg font-bold text-azul-uni">Clínica Psicológica</h1>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button id="logout-button"
+                class="flex items-center gap-2 px-4 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sair</span>
+            </button>
+        </div>
+    </header>
+
+    <div id="overlay" class="overlay md:hidden"></div>
+
+    <div class="flex content-with-header">
+        <aside id="sidebar"
+            class="sidebar-mobile w-64 md:w-64 bg-white border-r border-gray-200 min-h-screen fixed md:relative z-50 md:z-auto"
+            style="top: 70px; height: calc(100vh - 70px);">
+            <div class="p-4 md:p-6">
+                <div class="flex justify-between items-center md:hidden pb-4">
+                    <h2 class="font-semibold text-azul-uni">Menu</h2>
+                    <button id="close-menu" class="text-azul-uni p-2">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+
+                <div class="pb-6 border-b border-gray-100 md:hidden">
+                    <h1 class="text-xl font-bold text-azul-uni text-center">Clínica Psicológica</h1>
+                </div>
+
+                <!-- PERFIL SIDEBAR: SAMUEL -->
+                <div class="flex items-center gap-3 pb-6 border-b border-gray-100 mt-4 md:mt-0">
+                    <div class="profile-container">
+                        <!-- AJUSTADO: Tamanho reduzido para w-12 h-12 e borda reduzida para border (1px) -->
+                        <div class="w-12 h-12 rounded-full border border-dourado-uni overflow-hidden flex items-center justify-center bg-gray-100">
+                            <img src="imagens/fotoperfilSupervisor.png" alt="Supervisor" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center">
+                            <h3 class="font-semibold text-blue-900 text-base">Samuel Valdleno</h3>
+                        </div>
+                        <!-- AJUSTADO: Removido uppercase -->
+                        <p class="text-sm text-dourado-uni font-bold tracking-wide">Supervisor</p>
+                    </div>
+                </div>
+
+                <nav class="mt-6">
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 bg-blue-50 text-azul-uni font-semibold rounded-lg border-l-4 border-azul-uni">
+                                <i class="fas fa-home w-5"></i>
+                                <span>Início</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-file-medical w-5"></i>
+                                <span>Prontuários</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-users w-5"></i>
+                                <span>Seleção de Inscritos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-door-open w-5"></i>
+                                <span>Visualização de Salas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-calendar-check w-5"></i>
+                                <span>Consultas Agendadas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-chart-bar w-5"></i>
+                                <span>Gerar Relatório</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:bg-blue-50 hover:text-azul-uni rounded-lg transition-colors">
+                                <i class="fas fa-user w-5"></i>
+                                <span>Perfil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <div class="main-content flex-1">
+            <main class="p-4 md:p-6">
+                <div class="md:hidden mb-6">
+                    <h1 class="text-2xl font-semibold text-azul-uni mb-2">Painel do Estagiário</h1>
+                    <p class="text-gray-600">Gerencie prontuários, documentos e inscritos para consulta.</p>
+                </div>
+
+                <div class="separator md:hidden"></div>
+
+                <!-- CARD PERFIL PRINCIPAL: LUCAS -->
+                <div class="figma-card p-6 mb-8">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <div class="flex items-center gap-5 mb-4 md:mb-0">
+
+                            <!-- Foto de Perfil (Grande, borda fina) -->
+                            <div class="profile-container">
+                                <!-- AJUSTADO: Borda reduzida para border-2 -->
+                                <div class="w-23 h-24 rounded-full bg-gray-200 flex items-center justify-center border-2 border-azul-uni overflow-hidden shadow-sm">
+                                    <img src="imagens/fotoPerfilEstagiario.png" alt="Estagiário" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="mb-1">
+                                    <h2 class="text-2xl font-bold text-gray-900">Lucas Carvalho</h2>
+                                </div>
+                                <p class="text-gray-600 font-medium">Estagiário de Psicologia · <span class="text-azul-uni font-bold">UNIEURO</span></p>
+                                <p class="text-gray-500 text-sm">lucas.carvalho@email.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="figma-card p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Prontuários Recentes</h2>
+
+                    <div class="space-y-6">
+                        <!-- Prontuário 1 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                <div class="mb-3 md:mb-0 md:flex-1">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                            <span class="text-blue-600 font-medium">MS</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900">Maria Silva</h3>
+                                            <div class="flex items-center mt-1 flex-wrap">
+                                                <span class="text-gray-500 text-sm flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                    3 documentos
+                                                </span>
+                                                <span class="mx-2 text-gray-300 hidden md:inline">•</span>
+                                                <span class="text-gray-500 text-sm">Última atualização:
+                                                    14/05/2025</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mr-3">
+                                        Ativo
+                                    </span>
+                                    <button
+                                        class="text-blue-600 hover:text-blue-800 text-sm font-medium py-1 px-3 border border-gray-300 rounded-md hover:bg-blue-50 transition-colors view-record-btn"
+                                        data-record="Maria Silva">
+                                        Visualizar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Prontuário 2 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                <div class="mb-3 md:mb-0 md:flex-1">
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                            <span class="text-green-600 font-medium">RC</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900">Rafael Costa</h3>
+                                            <div class="flex items-center mt-1 flex-wrap">
+                                                <span class="text-gray-500 text-sm flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                    2 documentos
+                                                </span>
+                                                <span class="mx-2 text-gray-300 hidden md:inline">•</span>
+                                                <span class="text-gray-500 text-sm">Última atualização:
+                                                    19/05/2025</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mr-3">
+                                        Ativo
+                                    </span>
+                                    <button
+                                        class="text-blue-600 hover:text-blue-800 text-sm font-medium py-1 px-3 border border-gray-300 rounded-md hover:bg-blue-50 transition-colors view-record-btn"
+                                        data-record="Rafael Costa">
+                                        Visualizar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Prontuário 3 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                <div class="mb-3 md:mb-0 md:flex-1">
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                            <span class="text-purple-600 font-medium">CM</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900">Carla Mendes</h3>
+                                            <div class="flex items-center mt-1 flex-wrap">
+                                                <span class="text-gray-500 text-sm flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                    2 documentos
+                                                </span>
+                                                <span class="mx-2 text-gray-300 hidden md:inline">•</span>
+                                                <span class="text-gray-500 text-sm">Última atualização:
+                                                    28/04/2025</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 mr-3">
+                                        Pendente
+                                    </span>
+                                    <button
+                                        class="text-blue-600 hover:text-blue-800 text-sm font-medium py-1 px-3 border border-gray-300 rounded-md hover:bg-blue-50 transition-colors view-record-btn"
+                                        data-record="Carla Mendes">
+                                        Visualizar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+
+</body>
+
+</html>
