@@ -12,8 +12,10 @@ Cada pasta representa um projeto independente:
 - [projeto-financeiro](./projeto-financeiro)
 - [clinicapsi-prontuarios-telaestagiário](./clinicapsi-prontuarios-telaestagiário)
 - [clinicapsi-atendimentos-estagiario](./clinicapsi-atendimentos-estagiario)
+- [cadastrosClinicaPsicologia](./cadastrosClinicaPsicologia)
 - [cadastro-reservadesalas](./cadastro-reservadesalas)
 - [telaperfil-clinicapsicologia](./telaperfil-clinicapsicologia)
+- [tela-inicio-psicologia](./tela-inicio-psicologia)
 - (novos projetos serão adicionados aqui)  
 
 ## 🚀 Objetivo do Repositório  
